@@ -21,14 +21,15 @@ class FoodStuff(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
     
-    fruit = NonNegIntField
-    dairy = NonNegIntField
-    water = NonNegIntField
-    junk  = NonNegIntField
-    veg   = NonNegIntField
-    protein = NonNegIntField
-    startch = NonNegIntField
-    unknown = NonNegIntField   
+
+    fruit = models.SmallIntegerField(validators=[validate_non_neg])
+    dairy = models.SmallIntegerField(validators=[validate_non_neg])
+    water = models.SmallIntegerField(validators=[validate_non_neg])
+    junk  = models.SmallIntegerField(validators=[validate_non_neg])
+    veg   = models.SmallIntegerField(validators=[validate_non_neg])
+    protein = models.SmallIntegerField(validators=[validate_non_neg])
+    startch = models.SmallIntegerField(validators=[validate_non_neg])
+    unknown = models.SmallIntegerField(validators=[validate_non_neg])   
 
     def __str__(self):
         return self.name
@@ -46,14 +47,14 @@ class FoodEntry(models.Model):
     amount_value = models.FloatField(validators=validate_poss)
     description = models.CharField(max_length=500)
 
-    fruit = NonNegIntField
-    dairy = NonNegIntField
-    water = NonNegIntField
-    junk  = NonNegIntField
-    veg   = NonNegIntField
-    protein = NonNegIntField
-    startch = NonNegIntField
-    unknown = NonNegIntField   
+    fruit = models.SmallIntegerField(validators=[validate_non_neg])
+    dairy = models.SmallIntegerField(validators=[validate_non_neg])
+    water = models.SmallIntegerField(validators=[validate_non_neg])
+    junk  = models.SmallIntegerField(validators=[validate_non_neg])
+    veg   = models.SmallIntegerField(validators=[validate_non_neg])
+    protein = models.SmallIntegerField(validators=[validate_non_neg])
+    startch = models.SmallIntegerField(validators=[validate_non_neg])
+    unknown = models.SmallIntegerField(validators=[validate_non_neg])    
 
     def __str__(self):
         return str(self.date) + ': ' + self.amount_text
