@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<h1> Food Entries </h1>
+
+<ul>
+    <li> <a href="{% url 'new_food_entry' %}"> New </a>
+
+    {% for food_entry in food_entries %}
+        <li> <a href="{% url 'edit_food_entry' food_entry.id %}"> {{ food_entry }} </a>
+    {% endfor %}
+</ul>
+
+
+<ul>
+    <li> <a href="{% url 'new_food_entry' %}"> New </a>
+
+    {% for food_stuff in food_stuffs %}
+        <li> <a href="{% url 'edit_food_stuff' food_stuff.id %}"> {{ food_stuff }} </a>
+    {% endfor %}
+</ul>
