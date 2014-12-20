@@ -41,6 +41,7 @@ class FoodStuff(models.Model):
 class FoodEntry(models.Model):
     class Meta:
         ordering = ['date']
+        #verbose_name_plural = _('food entries')
 
     date = models.DateTimeField()
     amount_text = models.CharField(max_length=20)

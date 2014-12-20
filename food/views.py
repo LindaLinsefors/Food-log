@@ -1,15 +1,16 @@
 from django.shortcuts import get_object_or_404, render
 from django import forms
+from models import FoodEntry, FoodStuff
 
 # Create your views here.
 
 
 def home(request):
     food_entries = FoodEntry.objects.all()
-    food_stuffs = FoodStuffs.objects.all()
+    food_stuffs  = FoodStuff.objects.all()
     return render(request, 
-                  'food/home.html', 
-                  {'food_entries': FoodEntry.objects.all()
+                  'food/home', 
+                  {'food_entries': FoodEntry.objects.all(),
                    'food_stuffs' : FoodStuff.objects.all() } )
 
 
@@ -17,7 +18,7 @@ class FoodEntryForm(forms.ModelForm):
     class Meta:
         model=FoodEntry
 
-    description.widget=forms.Textarea
+    description = forms.CharField(max_length=500, widget=forms.Textarea)
 
 
 
@@ -28,7 +29,7 @@ class FoodStuffForm(forms.ModelForm):
 
 
 
-def edit(request, Class, ClassForm, id template='plots/form_template'):
+def edit(request, Class, ClassForm, id, template='plots/form_template'):
     class_instance = get_object_or_404(Class, pk=id)
 
     if request.method == 'POST':
@@ -55,16 +56,19 @@ def new(request, Class, ClassForm, url, template='food/form_template'):
     else:
         class_form = ClassForm()
 
+    return render(  request, template,
+                   {'class_form': class_form}   )  
+
 
 
 def new_food_entry(request):
-    new(request, FoodEntry, FoodEntryForm, 'food_entry')
+    return new(request, FoodEntry, FoodEntryForm, 'food_entry')
 
 def edit_food_entry(request, id):
-    edit(request, FoodEntry, FoodEntryForm, id)
+    return edit(request, FoodEntry, FoodEntryForm, id)
 
 def new_food_stuff(request):
-    new(request, FoodStuff, FoodStuffForm, 'food_stuff')
+    return new(request, FoodStuff, FoodStuffForm, 'food_stuff')
 
-def edit_food_entry(request, id):
-    edit(request, FoodStuff, FoodStuffForm, id)
+def edit_food_stuff(request, id):
+    return edit(request, FoodStuff, FoodStuffForm, id)

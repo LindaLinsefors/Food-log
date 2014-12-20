@@ -5,12 +5,12 @@ urlpatterns = patterns('',
     url(r'^$', 'food.views.home', name='home'),
 
     url(r'^food_stuff/new$', 
-            'food.views.new_food_stuf', name='new_food_stuf'),
+            'food.views.new_food_stuff',  name='new_food_stuff'),
     url(r'^food_stuff/(?P<id>\d+)/$', 
-            'food.views.edit_food_stuf', name='edit_food_stuf'),
+            'food.views.edit_food_stuff', name='edit_food_stuff'),
 
     url(r'^food_entry/new$', 
-            'food.views.new_food_entry', name='new_food_entry'),
+            'food.views.new_food_entry',  name='new_food_entry'),
     url(r'^food_entry/(?P<id>\d+)/$', 
             'food.views.edit_food_entry', name='edit_food_entry'),
     

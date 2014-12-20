@@ -11,6 +11,9 @@
 </ul>
 
 
+
+<h1> Food Stuffs </h1>
+
 <ul>
     <li> <a href="{% url 'new_food_entry' %}"> New </a>
 
