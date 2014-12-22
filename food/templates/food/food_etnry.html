@@ -34,26 +34,15 @@
                 );
             });                    
         });
-
-
-
-        function validateForm() {
-            alert("Tada!")
-            var x = document.forms["form"]["unknown"].value;
-            alert(x);
-            if (x<0) {
-                alert("Unknown should not be neggative");
-                return false;
-            }
-        }   
     </script>
 
 </head>
 <body>
     <form method="POST" name="form"> {% csrf_token %}
         <p>
-            <input type="submit" value="Save" onsubmit="return validateForm()">
+            <input type="submit" value="Save">
             <input type="button" value="Cancel">
+            {% if food_entry %} <input type="button" value="Cancel"> {% if food_entry %}
         </p>
         <p>
             Amount:
