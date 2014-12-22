@@ -7,17 +7,19 @@
     <script>
         $(document).ready(function(){
 
-            {{ if food_entry }}
+            {% if food_entry %}
                 $("#amount").val("{{ food_entry.amount }}")
                 $("#quantity").val("{{ food_entry.quantity }}")
                 $("#description").text("{{ food_entry.amount }}")
                 $("#fruit").val("{{ food_entry.fruit }}")
                 $("#veg").val("{{ food_entry.veg }}")
                 $("#dary").val("{{ food_entry.dary }}")
+                $("#water").val("{{ food_entry.water }}")
+                $("#starch").val("{{ food_entry.starch }}")
                 $("#protein").val("{{ food_entry.protein }}")
                 $("#junk").val("{{ food_entry.junk }}")
                 $("#unknown").val("{{ food_entry.unknown }}")
-            {{ endif }}
+            {% endif %}
 
             $(".percent").change(function(){
                 $("#unknown").val(
@@ -26,6 +28,8 @@
                     - $("#veg").val() 
                     - $("#dary").val() 
                     - $("#protein").val() 
+                    - $("#water").val() 
+                    - $("#starch").val() 
                     - $("#junk").val() 
                 );
             });                        
@@ -34,7 +38,7 @@
 
 </head>
 <body>
-    <form method="POST">
+    <form method="POST"> {% csrf_token %}
         <p>
             <input type="submit" value="Save">
             <input type="button" value="Cancel">
