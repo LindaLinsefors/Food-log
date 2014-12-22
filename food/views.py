@@ -4,6 +4,9 @@ from models import FoodEntry, FoodStuff
 
 # Create your views here.
 
+def test(request):
+    return render(request, 'food/food_etnry.html')
+
 
 def home(request):
     food_entries = FoodEntry.objects.all()

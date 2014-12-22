@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.utils import timezone
 
 # Create your models here.
 
@@ -21,7 +22,6 @@ class FoodStuff(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
     
-
     fruit = models.SmallIntegerField(validators=[validate_non_neg])
     dairy = models.SmallIntegerField(validators=[validate_non_neg])
     water = models.SmallIntegerField(validators=[validate_non_neg])
@@ -37,16 +37,15 @@ class FoodStuff(models.Model):
         return unicode(self.name)
 
 
-
 class FoodEntry(models.Model):
-    class Meta:
-        ordering = ['date']
+    #class Meta:
+        #ordering = ['date']
         #verbose_name_plural = _('food entries')
 
-    date = models.DateTimeField()
-    amount_text = models.CharField(max_length=20)
-    amount_value = models.FloatField(validators=validate_poss)
-    description = models.CharField(max_length=500)
+    # date = models.DateTimeField( default=timezone.now() )
+    amount = models.CharField( max_length=20 )
+    quantity = models.FloatField( validators=validate_poss )
+    description = models.CharField( max_length=500 )
 
     fruit = models.SmallIntegerField(validators=[validate_non_neg])
     dairy = models.SmallIntegerField(validators=[validate_non_neg])

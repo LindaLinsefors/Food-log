@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            {{ if food_entry }}
+                $("#amount").val("{{ food_entry.amount }}")
+                $("#quantity").val("{{ food_entry.quantity }}")
+                $("#description").text("{{ food_entry.amount }}")
+                $("#fruit").val("{{ food_entry.fruit }}")
+                $("#veg").val("{{ food_entry.veg }}")
+                $("#dary").val("{{ food_entry.dary }}")
+                $("#protein").val("{{ food_entry.protein }}")
+                $("#junk").val("{{ food_entry.junk }}")
+                $("#unknown").val("{{ food_entry.unknown }}")
+            {{ endif }}
+
+            $(".percent").change(function(){
+                $("#unknown").val(
+                    100
+                    - $("#fruit").val() 
+                    - $("#veg").val() 
+                    - $("#dary").val() 
+                    - $("#protein").val() 
+                    - $("#junk").val() 
+                );
+            });                        
+        });   
+    </script>
+
+</head>
+<body>
+    <form method="POST">
+        <p>
+            <input type="submit" value="Save">
+            <input type="button" value="Cancel">
+        </p>
+        <p>
+            Amount:
+            <input type="text" name="amount" id="amount">
+            <input type="number" name="quantity" id="quatity" min="0" reqierd >
+        </p>        
+        <p>
+            <textarea style="width:100%" name="description" id="description">
+            </textarea>
+        </p>
+        <p>
+            Type:
+            <input list="food_stuffs" name="food_stuff" autocomplete="off">
+            <datalist id="food_stuffs">
+            {% for food_stuff in food_stuffs %}
+                <option value="{{ food_stuff.name }}">
+            {% endfor %}
+            </datalist>
+            <input type="button" id="get_percentages" value="Get percentages">
+        </p>
+        
+        <table style="width:100%">
+            <tr>
+                <td>Fruit:</td>
+                <td><input type="number" name="fruit" id="fruit" 
+                        min="0" max="100" class="percent">%</td>
+                <td>Veg:</td>
+                <td><input type="number" name="veg" id="veg" 
+                        min="0" max="100" class="percent">%</td>
+            <tr>
+            <tr>
+                <td>Dary:</td>
+                <td><input type="number" name="dary" id="dary"
+                        min="0" max="100" class="percent">%</td>
+                <td>Protein:</td>
+                <td><input type="number" name="protein" id="protein"
+                        min="0" max="100" class="percent">%</td>
+            <tr>
+            <tr>
+                <td>Water:</td>
+                <td><input type="number" name="water" id="water"
+                        min="0" max="100" class="percent">%</td>
+                <td>Starch:</td>
+                <td><input type="number" name="starch" id="starch"
+                        min="0" max="100" class="percent">%</td>
+            <tr>
+            <tr>
+                <td>Junk:</td>
+                <td><input type="number" name="junk" id="junk"
+                        min="0" max="100" class="percent">%</td>
+                <td>Unknown:</td>
+                <td><input type="number" name="unknown" id="unknown"
+                        min="0" max="100" readonly>%</td>
+            <tr>
+        </table>
+    </form>   
+</body>
+</html>
+
+
