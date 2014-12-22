@@ -2,8 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 urlpatterns = patterns('',
-    #url(r'^$', 'food.views.home', name='home'),
-    url(r'^$', 'food.views.test'),
+    url(r'^$', 'food.views.home', name='home'),
+    #url(r'^$', 'food.views.test'),
 
     url(r'^food_stuff/new$', 
             'food.views.new_food_stuff',  name='new_food_stuff'),

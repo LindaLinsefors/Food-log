@@ -16,6 +16,22 @@ def home(request):
                   {'food_entries': FoodEntry.objects.all(),
                    'food_stuffs' : FoodStuff.objects.all() } )
 
+def new_food_entry(request):
+    return render(  request, 'food/food_etnry.html',
+                   {'food_stuffs': FoodStuff.objects.all() }   )   
+
+def edit_food_entry(request, id):
+    food_entry = get_object_or_404(FoodEntry, pk=id)
+    return render(  request, 'food/food_etnry.html',
+                   {'food_stuffs': FoodStuff.objects.all(), 
+                    'food_entry': food_entry                }   )   
+
+
+
+
+
+
+
 
 class FoodEntryForm(forms.ModelForm):
     class Meta:
@@ -63,12 +79,13 @@ def new(request, Class, ClassForm, url, template='food/form_template'):
                    {'class_form': class_form}   )  
 
 
-
+'''
 def new_food_entry(request):
     return new(request, FoodEntry, FoodEntryForm, 'food_entry')
 
 def edit_food_entry(request, id):
     return edit(request, FoodEntry, FoodEntryForm, id)
+'''
 
 def new_food_stuff(request):
     return new(request, FoodStuff, FoodStuffForm, 'food_stuff')

@@ -41,8 +41,12 @@
     <form method="POST" name="form"> {% csrf_token %}
         <p>
             <input type="submit" value="Save">
-            <input type="button" value="Cancel">
-            {% if food_entry %} <input type="button" value="Cancel"> {% if food_entry %}
+            <a href="{% url 'home' %}">Cancel</a>
+            {% if food_entry %}
+            <a href="{% url 'home' %}" 
+                onclick="return confirm('Are you sure you want to delete?');"
+                >Delete</a>
+            {% if food_entry %}
         </p>
         <p>
             Amount:
