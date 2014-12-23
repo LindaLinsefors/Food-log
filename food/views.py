@@ -17,14 +17,25 @@ def home(request):
                    'food_stuffs' : FoodStuff.objects.all() } )
 
 def new_food_entry(request):
-    return render(  request, 'food/food_etnry.html',
-                   {'food_stuffs': FoodStuff.objects.all() }   )   
+    if request.method != 'POST':
+        return render(  request, 'food/food_etnry.html',
+                       {'food_stuffs': FoodStuff.objects.all() }   )
+
+    food_entry_dict = dict(request.POST)
+    del food_entry_dict['food_stuff']
+    del food_entry_dict['csrfmiddlewaretoken']
+    import pdb; pdb.set_trace()
+    FoodEntry(**food_entry_dict).save()
+    return HttpResponseRedirect( reverse('home') )
+
+
 
 def edit_food_entry(request, id):
-    food_entry = get_object_or_404(FoodEntry, pk=id)
-    return render(  request, 'food/food_etnry.html',
-                   {'food_stuffs': FoodStuff.objects.all(), 
-                    'food_entry': food_entry                }   )   
+    if request.method != 'POST':
+        food_entry = get_object_or_404(FoodEntry, pk=id)
+        return render(  request, 'food/food_etnry.html',
+                       {'food_stuffs': FoodStuff.objects.all(), 
+                        'food_entry': food_entry                }   )   
 
 
 
