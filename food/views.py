@@ -97,7 +97,7 @@ class FoodStuffForm(forms.ModelForm):
 
 
 
-def edit(request, Class, ClassForm, id, template='plots/form_template'):
+def edit(request, Class, ClassForm, id, template='food/form_template'):
     class_instance = get_object_or_404(Class, pk=id)
 
     if request.method == 'POST':

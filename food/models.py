@@ -16,8 +16,8 @@ def validate_poss(value):
 NonNegIntField = models.SmallIntegerField(validators=[validate_percent])
 
 
-class Food(models.Model)
-    class Meta
+class Food(models.Model):
+    class Meta:
         abstract = True
 
     ingredients = models.CharField( max_length=500 )
