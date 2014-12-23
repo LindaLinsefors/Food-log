@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django import forms
 from models import FoodEntry, FoodStuff
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 
@@ -21,11 +23,20 @@ def new_food_entry(request):
         return render(  request, 'food/food_etnry.html',
                        {'food_stuffs': FoodStuff.objects.all() }   )
 
-    food_entry_dict = dict(request.POST)
-    del food_entry_dict['food_stuff']
-    del food_entry_dict['csrfmiddlewaretoken']
-    import pdb; pdb.set_trace()
-    FoodEntry(**food_entry_dict).save()
+    persentages={}    
+    for food_type in (  'fruit', 'dairy','water','junk',
+                        'veg', 'protein', 'startch', 'unknown'):
+        try:
+            persentages[food_type] = int(float(request.POST[food_type]))
+        except ValueError:
+            persentages[food_type] = 0
+    
+    food_entry=FoodEntry(**persentages)
+    food_entry.amount = request.POST['amount']
+    food_entry.quantity = float(request.POST['quantity'])
+    food_entry.description = request.POST['description']
+    food_entry.save()
+
     return HttpResponseRedirect( reverse('home') )
 
 
@@ -36,6 +47,13 @@ def edit_food_entry(request, id):
         return render(  request, 'food/food_etnry.html',
                        {'food_stuffs': FoodStuff.objects.all(), 
                         'food_entry': food_entry                }   )   
+
+
+def delete_food_entry(request, id):
+    food_entry = get_object_or_404(FoodEntry, pk=id)
+    food_entry.delete()
+    return HttpResponseRedirect( reverse('home') )
+    
 
 
 

@@ -10,7 +10,7 @@
             {% if food_entry %}
                 $("#amount").val("{{ food_entry.amount }}")
                 $("#quantity").val("{{ food_entry.quantity }}")
-                $("#description").text("{{ food_entry.amount }}")
+                $("#description").text("{{ food_entry.description }}")
                 $("#fruit").val("{{ food_entry.fruit }}")
                 $("#veg").val("{{ food_entry.veg }}")
                 $("#dairy").val("{{ food_entry.dairy }}")
@@ -43,7 +43,7 @@
             <input type="submit" value="Save">
             <a href="{% url 'home' %}">Cancel</a>
             {% if food_entry %}
-            <a href="{% url 'home' %}" 
+            <a href="{% url 'delete_food_entry' food_entry.id %}" 
                 onclick="return confirm('Are you sure you want to delete?');"
                 >Delete</a>
             {% endif %}
@@ -52,7 +52,7 @@
             Amount:
             <input type="text" name="amount" id="amount" 
                 maxlength="30" required >
-            <input type="number" name="quantity" id="quatity" 
+            <input type="number" name="quantity" id="quantity" 
                 min="0" step="0.1" required >
         </p>        
         <p>

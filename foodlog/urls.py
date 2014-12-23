@@ -10,10 +10,13 @@ urlpatterns = patterns('',
     url(r'^food_stuff/(?P<id>\d+)/$', 
             'food.views.edit_food_stuff', name='edit_food_stuff'),
 
+
     url(r'^food_entry/new$', 
             'food.views.new_food_entry',  name='new_food_entry'),
     url(r'^food_entry/(?P<id>\d+)/$', 
             'food.views.edit_food_entry', name='edit_food_entry'),
+    url(r'^food_entry/(?P<id>\d+)/delete$', 
+            'food.views.delete_food_entry', name='delete_food_entry'),
     
     url(r'^admin/', include(admin.site.urls)),
 )
