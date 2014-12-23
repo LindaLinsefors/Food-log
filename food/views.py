@@ -18,35 +18,59 @@ def home(request):
                   {'food_entries': FoodEntry.objects.all(),
                    'food_stuffs' : FoodStuff.objects.all() } )
 
-def new_food_entry(request):
-    if request.method != 'POST':
-        return render(  request, 'food/food_etnry.html',
-                       {'food_stuffs': FoodStuff.objects.all() }   )
 
-    persentages={}    
-    for food_type in (  'fruit', 'dairy','water','junk',
-                        'veg', 'protein', 'startch', 'unknown'):
+
+def save(food_entry, post):
+    if post['food_stuff'] == u'': #extend to also give true for only blanks
+        for food_type in (  'fruit', 'dairy', 'water', 'junk',
+                            'veg', 'protein', 'startch', 'unknown'):
+            if post[food_type] == u'':
+                setattr(food_entry, food_type, 0)
+            else:
+                setattr(food_entry, food_type, int(float(post[food_type])) )   
+    else:
         try:
-            persentages[food_type] = int(float(request.POST[food_type]))
-        except ValueError:
-            persentages[food_type] = 0
-    
-    food_entry=FoodEntry(**persentages)
-    food_entry.amount = request.POST['amount']
-    food_entry.quantity = float(request.POST['quantity'])
-    food_entry.description = request.POST['description']
+            food_stuff = FoodStuff.objects.get(
+                            name=request.POST['food_stuff'] )
+        except DoesNotExist:
+            food_sruff = FoodStuff( name=request.POST['food_stuff'] )
+
+        for food_type in (  'fruit', 'dairy', 'water', 'junk',
+                            'veg', 'protein', 'startch', 'unknown'):
+            if post[food_type] == u'':
+                setattr(food_entry, food_type, 0)
+                setattr(food_stuff, food_type, 0)
+            else:
+                setattr(food_entry, food_type, int(float(post[food_type])) )
+                setattr(food_stuff, food_type, int(float(post[food_type])) )
+
+    food_entry.amount = post['amount']
+    food_entry.quantity = float(post['quantity'])
+    food_entry.description = post['description']
     food_entry.save()
 
-    return HttpResponseRedirect( reverse('home') )
+    
 
+def new_food_entry(request):
+    if request.method != 'POST':
+        save( FoodEntry(), request.POST )
+        return HttpResponseRedirect( reverse('home') )
+
+    return render(  request, 'food/food_etnry.html',
+                   {'food_stuffs': FoodStuff.objects.all() }   )
 
 
 def edit_food_entry(request, id):
-    if request.method != 'POST':
-        food_entry = get_object_or_404(FoodEntry, pk=id)
-        return render(  request, 'food/food_etnry.html',
-                       {'food_stuffs': FoodStuff.objects.all(), 
-                        'food_entry': food_entry                }   )   
+    food_entry = get_object_or_404(FoodEntry, pk=id)
+
+    if request.method == 'POST':
+        save( food_entry, request.POST )
+        return HttpResponseRedirect( reverse('home') )
+        
+    return render(  request, 'food/food_etnry.html',
+                   {'food_stuffs': FoodStuff.objects.all(), 
+                    'food_entry': food_entry                }   )   
+
 
 
 def delete_food_entry(request, id):
