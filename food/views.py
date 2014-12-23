@@ -79,20 +79,11 @@ def delete_food_entry(request, id):
 
 
 
-
-
-
-class FoodEntryForm(forms.ModelForm):
-    class Meta:
-        model=FoodEntry
-
-    description = forms.CharField(max_length=500, widget=forms.Textarea)
-
-
-
 class FoodStuffForm(forms.ModelForm):
     class Meta:
         model=FoodStuff
+
+    ingredients = forms.CharField(max_length=500, widget=forms.Textarea)
 
 
 
@@ -128,13 +119,6 @@ def new(request, Class, ClassForm, url, template='food/form_template'):
                    {'class_form': class_form}   )  
 
 
-'''
-def new_food_entry(request):
-    return new(request, FoodEntry, FoodEntryForm, 'food_entry')
-
-def edit_food_entry(request, id):
-    return edit(request, FoodEntry, FoodEntryForm, id)
-'''
 
 def new_food_stuff(request):
     return new(request, FoodStuff, FoodStuffForm, 'food_stuff')
