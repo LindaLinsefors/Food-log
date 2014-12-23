@@ -4,6 +4,7 @@ from models import FoodEntry, FoodStuff
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist 
+from django.core import serializers
 
 # Create your views here.
 
@@ -73,6 +74,19 @@ def delete_food_entry(request, id):
     food_entry = get_object_or_404(FoodEntry, pk=id)
     food_entry.delete()
     return HttpResponseRedirect( reverse('home') )
+    
+
+
+def get_food_stuff_info(request):
+    #import pdb; pdb.set_trace()
+    food_stuff_name = request.POST['food_stuff_name']
+    try:
+        food_stuff = FoodStuff.objects.get( name=food_stuff_name )
+    except ObjectDoesNotExist:
+        return HttpResponse('does_not_exist')
+
+    return HttpResponse(serializers.serialize('json', [food_stuff]))
+
     
 
 

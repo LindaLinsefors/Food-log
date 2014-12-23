@@ -32,7 +32,27 @@
                     - $("#startch").val() 
                     - $("#junk").val() 
                 );
-            });                    
+            });   
+            
+            $("#get_info").click(function(){
+                $.post("{% url 'get_food_stuff_info' %}",
+                    {
+                        csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+                        food_stuff_name: $("#food_stuff").val()
+                    },
+                    function(response, status){
+                        if (response == "does_not_exist"){
+                            alert('"'+$("#food_stuff").val()+'"'
+                                  + " does not exixt yet");
+                        }
+                        else {
+                            alert(response);
+                            var data = JSON.parse(response);
+                        }
+                    }
+                );
+            }); 
+                 
         });
     </script>
 
@@ -58,14 +78,14 @@
 
         <p>
             Type:
-            <input list="food_stuffs" name="food_stuff" autocomplete="off"          
-                maxlength="30">
+            <input list="food_stuffs" name="food_stuff" id="food_stuff"
+                autocomplete="off" maxlength="30">
             <datalist id="food_stuffs">
             {% for food_stuff in food_stuffs %}
                 <option value="{{ food_stuff.name }}">
             {% endfor %}
             </datalist>
-            <input type="button" id="get_percentages" value="Get info">
+            <input type="button" id="get_info" value="Get info">
         </p>
         
         <p>

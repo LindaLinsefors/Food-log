@@ -17,6 +17,9 @@ urlpatterns = patterns('',
             'food.views.edit_food_entry', name='edit_food_entry'),
     url(r'^food_entry/(?P<id>\d+)/delete$', 
             'food.views.delete_food_entry', name='delete_food_entry'),
+
+    url(r'^get_info/$', 
+            'food.views.get_food_stuff_info', name='get_food_stuff_info'),
     
     url(r'^admin/', include(admin.site.urls)),
 )
