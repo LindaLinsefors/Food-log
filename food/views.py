@@ -3,6 +3,7 @@ from django import forms
 from models import FoodEntry, FoodStuff
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist 
 
 # Create your views here.
 
@@ -19,7 +20,6 @@ def home(request):
                    'food_stuffs' : FoodStuff.objects.all() } )
 
 
-
 def save(food_entry, post):
     if post['food_stuff'] == u'': #extend to also give true for only blanks
         for food_type in (  'fruit', 'dairy', 'water', 'junk',
@@ -30,10 +30,9 @@ def save(food_entry, post):
                 setattr(food_entry, food_type, int(float(post[food_type])) )   
     else:
         try:
-            food_stuff = FoodStuff.objects.get(
-                            name=request.POST['food_stuff'] )
-        except DoesNotExist:
-            food_sruff = FoodStuff( name=request.POST['food_stuff'] )
+            food_stuff = FoodStuff.objects.get( name=post['food_stuff'] )
+        except ObjectDoesNotExist:
+            food_stuff = FoodStuff( name=post['food_stuff'] )
 
         for food_type in (  'fruit', 'dairy', 'water', 'junk',
                             'veg', 'protein', 'startch', 'unknown'):
@@ -52,7 +51,7 @@ def save(food_entry, post):
     
 
 def new_food_entry(request):
-    if request.method != 'POST':
+    if request.method == 'POST':
         save( FoodEntry(), request.POST )
         return HttpResponseRedirect( reverse('home') )
 
@@ -70,7 +69,6 @@ def edit_food_entry(request, id):
     return render(  request, 'food/food_etnry.html',
                    {'food_stuffs': FoodStuff.objects.all(), 
                     'food_entry': food_entry                }   )   
-
 
 
 def delete_food_entry(request, id):
