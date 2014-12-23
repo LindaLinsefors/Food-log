@@ -56,10 +56,14 @@ class FoodEntry(models.Model):
     startch = models.SmallIntegerField(validators=[validate_percent])
     unknown = models.SmallIntegerField(validators=[validate_percent])    
 
+    
     def __str__(self):
-        return str(self.date) + ': ' + self.amount_text
+        #return str(self.date) + ': ' + self.amount_text
+        return str(self.amount)
+
     def __unicode__(self):          # for Python 2 
-        return unicode(self.date) + u': ' + unicode(self.amount_text)
+        #return unicode(self.date) + u': ' + unicode(self.amount_text)
+        return unicode(self.amount)
 
 
 
