@@ -21,32 +21,30 @@ def home(request):
 
 
 def save(food_entry, post):
-    if post['food_stuff'] == u'': #extend to also give true for only blanks
-        for food_type in (  'fruit', 'dairy', 'water', 'junk',
-                            'veg', 'protein', 'startch', 'unknown'):
-            if post[food_type] == u'':
-                setattr(food_entry, food_type, 0)
-            else:
-                setattr(food_entry, food_type, int(float(post[food_type])) )   
-    else:
-        try:
-            food_stuff = FoodStuff.objects.get( name=post['food_stuff'] )
-        except ObjectDoesNotExist:
-            food_stuff = FoodStuff( name=post['food_stuff'] )
+    try:
+        food_stuff = FoodStuff.objects.get( name=post['food_stuff'] )
+    except ObjectDoesNotExist:
+        food_stuff = FoodStuff( name=post['food_stuff'] )
 
-        for food_type in (  'fruit', 'dairy', 'water', 'junk',
-                            'veg', 'protein', 'startch', 'unknown'):
-            if post[food_type] == u'':
-                setattr(food_entry, food_type, 0)
-                setattr(food_stuff, food_type, 0)
-            else:
-                setattr(food_entry, food_type, int(float(post[food_type])) )
-                setattr(food_stuff, food_type, int(float(post[food_type])) )
+    for food_type in (  'fruit', 'dairy', 'water', 'junk',
+                        'veg', 'protein', 'startch', 'unknown'):
+        if post[food_type] == u'':
+            setattr(food_entry, food_type, 0)
+            setattr(food_stuff, food_type, 0)
+        else:
+            setattr(food_entry, food_type, int(float(post[food_type])) )
+            setattr(food_stuff, food_type, int(float(post[food_type])) )
 
     food_entry.amount = post['amount']
     food_entry.quantity = float(post['quantity'])
-    food_entry.description = post['description']
+    food_entry.food_stuff = post['food_stuff']
+    food_entry.ingredients = post['ingredients']
     food_entry.save()
+
+    food_stuff.name = post['food_stuff']
+    food_stuff.ingredients = post['ingredients']
+    food_stuff.save()
+
 
     
 
