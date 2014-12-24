@@ -94,7 +94,7 @@ class FoodStuffForm(forms.ModelForm):
     class Meta:
         model=FoodStuff
 
-    ingredients = forms.CharField(max_length=500, widget=forms.Textarea)
+    ingredients = forms.CharField(max_length=500, widget=forms.Textarea, required=False )
 
 
 

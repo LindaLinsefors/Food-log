@@ -12,7 +12,7 @@
 
 
 
-<h1> Food Stuffs </h1>
+<h1> Food Types </h1>
 
 <ul>
     <li> <a href="{% url 'new_food_stuff' %}"> New </a>
