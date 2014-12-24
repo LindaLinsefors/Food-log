@@ -8,10 +8,6 @@ from django.core import serializers
 
 # Create your views here.
 
-def test(request):
-    return render(request, 'food/food_etnry.html')
-
-
 def home(request):
     food_entries = FoodEntry.objects.all()
     food_stuffs  = FoodStuff.objects.all()
@@ -54,7 +50,7 @@ def new_food_entry(request):
         save( FoodEntry(), request.POST )
         return HttpResponseRedirect( reverse('home') )
 
-    return render(  request, 'food/food_etnry.html',
+    return render(  request, 'food/food_entry.html',
                    {'food_stuffs': FoodStuff.objects.all() }   )
 
 
@@ -65,7 +61,7 @@ def edit_food_entry(request, id):
         save( food_entry, request.POST )
         return HttpResponseRedirect( reverse('home') )
         
-    return render(  request, 'food/food_etnry.html',
+    return render(  request, 'food/edit_food_entry.html',
                    {'food_stuffs': FoodStuff.objects.all(), 
                     'food_entry': food_entry                }   )   
 

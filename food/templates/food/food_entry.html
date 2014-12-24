@@ -7,20 +7,6 @@
     <script>
         $(document).ready(function(){
 
-            {% if food_entry %}
-                $("#amount").val("{{ food_entry.amount }}");
-                $("#quantity").val("{{ food_entry.quantity }}");
-                $("#description").text("{{ food_entry.description }}");
-                $("#fruit").val("{{ food_entry.fruit }}");
-                $("#veg").val("{{ food_entry.veg }}");
-                $("#dairy").val("{{ food_entry.dairy }}");
-                $("#water").val("{{ food_entry.water }}");
-                $("#startch").val("{{ food_entry.startch }}");
-                $("#protein").val("{{ food_entry.protein }}");
-                $("#junk").val("{{ food_entry.junk }}");
-                $("#unknown").val("{{ food_entry.unknown }}");
-            {% endif %}
-
             $("#quantity").change(function(){
                 $("#quantity").val( eval( $("#quantity").val() ) );
             }); 
@@ -75,28 +61,28 @@
             <input type="submit" value="Save">
             <input type="reset" value="Reset">
             <a href="{% url 'home' %}">Cancel</a>
-            {% if food_entry %}
-            <a href="{% url 'delete_food_entry' food_entry.id %}" 
-                onclick="return confirm('Are you sure you want to delete?');"
-                >Delete</a>
-            {% endif %}
+            {% block delete %}
+            {% endblock %}
         </p>
-
+        
+        {% block diffrent_for_food_stuff %}
         <p>
             Here be date and time
         </p>
 
         <p>
             Amount:
-            <input type="text" name="amount" id="amount" 
-                maxlength="30" required >
-            <input type="text" name="quantity" id="quantity" required >
+            <input type="text" name="amount" id="amount" maxlength="30" required 
+                {% block amount %}{% endblock %}>
+            <input type="text" name="quantity" id="quantity" required 
+                {% block quantity %}{% endblock %}>
         </p>        
 
         <p>
             Type:
             <input list="food_stuffs" name="food_stuff" id="food_stuff"
-                autocomplete="off" maxlength="30">
+                autocomplete="off" maxlength="30" 
+                {% block food_stuff %}{% endblock %}>
             <datalist id="food_stuffs">
             {% for food_stuff in food_stuffs %}
                 <option value="{{ food_stuff.name }}">
@@ -104,45 +90,54 @@
             </datalist>
             <input type="button" id="get_info" value="Get info">
         </p>
+        {% end block %}
         
         <p>
             <textarea style="width:100%" name="ingredients" id="ingredients" 
-                maxlength="500"></textarea>
+                maxlength="500" {% block ingredients %}{% endblock %}></textarea>
         </p>
 
         <table style="width:100%">
             <tr>
                 <td>Fruit:</td>
                 <td><input type="number" name="fruit" id="fruit" 
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block fruit %}{% endblock %}>%</td>
                 <td>Veg:</td>
                 <td><input type="number" name="veg" id="veg" 
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block veg %}{% endblock %}>%</td>
             <tr>
             <tr>
                 <td>Dairy:</td>
                 <td><input type="number" name="dairy" id="dairy"
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block dairy %}{% endblock %}>%</td>
                 <td>Protein:</td>
                 <td><input type="number" name="protein" id="protein"
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block protein %}{% endblock %}>%</td>
             <tr>
             <tr>
                 <td>Water:</td>
                 <td><input type="number" name="water" id="water"
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block water %}{% endblock %}>%</td>
                 <td>Startch:</td>
                 <td><input type="number" name="startch" id="startch"
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block startch %}{% endblock %}>%</td>
             <tr>
             <tr>
                 <td>Junk:</td>
                 <td><input type="number" name="junk" id="junk"
-                        min="0" max="100" class="percent">%</td>
+                        min="0" max="100" class="percent"
+                        {% block junk %}{% endblock %}>%</td>
                 <td>Unknown:</td>
                 <td><input type="number" name="unknown" id="unknown"
                         min="0" max="100" class="percent" 
-                        value=100>%</td>
+                        value=100
+                        {% block unknown %}{% endblock %}>%</td>
             <tr>
         </table>
     </form>   
