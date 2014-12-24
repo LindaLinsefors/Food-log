@@ -70,9 +70,10 @@
 
 </head>
 <body>
-    <form method="POST" name="form"> {% csrf_token %}
+    <form method="POST" name="form" id="form"> {% csrf_token %}
         <p>
             <input type="submit" value="Save">
+            <input type="reset" value="Reset">
             <a href="{% url 'home' %}">Cancel</a>
             {% if food_entry %}
             <a href="{% url 'delete_food_entry' food_entry.id %}" 
