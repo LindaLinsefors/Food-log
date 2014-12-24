@@ -9,6 +9,8 @@ urlpatterns = patterns('',
             'food.views.new_food_stuff',  name='new_food_stuff'),
     url(r'^food_stuff/(?P<id>\d+)/$', 
             'food.views.edit_food_stuff', name='edit_food_stuff'),
+    url(r'^food_stuff/(?P<id>\d+)/delete$', 
+            'food.views.delete_food_stuff', name='delete_food_stuff'),
 
 
     url(r'^food_entry/new$', 

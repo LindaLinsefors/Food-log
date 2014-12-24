@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<form method="POST" >
+    <input type="submit" value="Save">
+    <a href="{% url 'home' %}">Cancel</a>
+    {% if food_stuff %}
+    <a href="{% url 'delete_food_stuff' food_stuff.id %}" 
+        onclick="return confirm('Are you sure you want to delete?');"
+        >Delete</a>
+    {% endif %}
+    {% csrf_token %}
+    {{ class_form.as_p }}
+</form>
+
+<p>This form is for looking at and editing food types. It is just here for testing purpoes. The form will not check that you filed in things correctly. If you fill in something odd this may or may not crach the program.</p>

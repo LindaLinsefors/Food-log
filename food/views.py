@@ -78,7 +78,6 @@ def delete_food_entry(request, id):
 
 
 def get_food_stuff_info(request):
-    #import pdb; pdb.set_trace()
     food_stuff_name = request.POST['food_stuff_name']
     try:
         food_stuff = FoodStuff.objects.get( name=food_stuff_name )
@@ -88,8 +87,6 @@ def get_food_stuff_info(request):
     return HttpResponse(serializers.serialize('json', [food_stuff]))
 
     
-
-
 
 
 
@@ -135,7 +132,14 @@ def new(request, Class, ClassForm, url, template='food/form_template'):
 
 
 def new_food_stuff(request):
-    return new(request, FoodStuff, FoodStuffForm, 'food_stuff')
+    return new(request, FoodStuff, FoodStuffForm, 'food_stuff', 
+        template='food/food_stuff.html')
 
 def edit_food_stuff(request, id):
-    return edit(request, FoodStuff, FoodStuffForm, id)
+    return edit(request, FoodStuff, FoodStuffForm, id,
+        template='food/food_stuff.html')
+
+def delete_food_stuff(request, id):
+    food_stuff = get_object_or_404(FoodStuff, pk=id)
+    food_stuff.delete()
+    return HttpResponseRedirect( reverse('home') )

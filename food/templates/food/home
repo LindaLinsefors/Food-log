@@ -15,7 +15,7 @@
 <h1> Food Stuffs </h1>
 
 <ul>
-    <li> <a href="{% url 'new_food_entry' %}"> New </a>
+    <li> <a href="{% url 'new_food_stuff' %}"> New </a>
 
     {% for food_stuff in food_stuffs %}
         <li> <a href="{% url 'edit_food_stuff' food_stuff.id %}"> {{ food_stuff }} </a>
