@@ -21,6 +21,9 @@ urlpatterns = patterns('',
 
     url(r'^get_info/$', 
             'food.views.get_food_stuff_info', name='get_food_stuff_info'),
+
+    url(r'^js/$',
+            'food.views.food_entry_js', name='food_entry_js'),
     
     url(r'^admin/', include(admin.site.urls)),
 )

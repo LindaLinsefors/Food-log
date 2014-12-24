@@ -43,7 +43,9 @@ def save(food_entry, post):
     food_stuff.save()
 
 
-    
+def food_entry_js(request):
+    return render( request, 'food/food_entry.js' )
+
 
 def new_food_entry(request):
     if request.method == 'POST':
