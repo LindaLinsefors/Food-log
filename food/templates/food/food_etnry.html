@@ -8,18 +8,22 @@
         $(document).ready(function(){
 
             {% if food_entry %}
-                $("#amount").val("{{ food_entry.amount }}")
-                $("#quantity").val("{{ food_entry.quantity }}")
-                $("#description").text("{{ food_entry.description }}")
-                $("#fruit").val("{{ food_entry.fruit }}")
-                $("#veg").val("{{ food_entry.veg }}")
-                $("#dairy").val("{{ food_entry.dairy }}")
-                $("#water").val("{{ food_entry.water }}")
-                $("#startch").val("{{ food_entry.startch }}")
-                $("#protein").val("{{ food_entry.protein }}")
-                $("#junk").val("{{ food_entry.junk }}")
-                $("#unknown").val("{{ food_entry.unknown }}")
+                $("#amount").val("{{ food_entry.amount }}");
+                $("#quantity").val("{{ food_entry.quantity }}");
+                $("#description").text("{{ food_entry.description }}");
+                $("#fruit").val("{{ food_entry.fruit }}");
+                $("#veg").val("{{ food_entry.veg }}");
+                $("#dairy").val("{{ food_entry.dairy }}");
+                $("#water").val("{{ food_entry.water }}");
+                $("#startch").val("{{ food_entry.startch }}");
+                $("#protein").val("{{ food_entry.protein }}");
+                $("#junk").val("{{ food_entry.junk }}");
+                $("#unknown").val("{{ food_entry.unknown }}");
             {% endif %}
+
+            $("#quantity").change(function(){
+                $("#quantity").val( eval( $("#quantity").val() ) );
+            }); 
 
             $(".percent").change(function(){
                 $("#unknown").val(
@@ -85,8 +89,7 @@
             Amount:
             <input type="text" name="amount" id="amount" 
                 maxlength="30" required >
-            <input type="number" name="quantity" id="quantity" 
-                min="0" required step="0.01">
+            <input type="text" name="quantity" id="quantity" required >
         </p>        
 
         <p>
