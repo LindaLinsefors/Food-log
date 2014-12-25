@@ -1,10 +1,10 @@
-alert('Hej, js is running');
+
 
 $(document).ready(function(){
 
-    $("#quantity").change(function(){
+    $("#quantity_formula").change(function(){
         $("#quantity").val( 
-            eval( $("#quantity").val() ).toFixed(2)
+            eval( $("#quantity_formula").val() ).toFixed(2)
         );
     }); 
 

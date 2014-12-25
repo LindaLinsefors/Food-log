@@ -26,7 +26,8 @@
         <p>
             Amount:
             <input type="text" name="amount" id="amount" maxlength="30" required 
-                {% block amount %}{% endblock %}>
+                {% block amount %}{% endblock %}><br>
+            <input type="text" id="quantity_formula">
             <input type="number" step="0.01" name="quantity" id="quantity" required 
                 {% block quantity %}{% endblock %}>
         </p>        
