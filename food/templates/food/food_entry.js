@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     $("#quantity").change(function(){
         $("#quantity").val( 
-            eval( $("#quantity").val() ).toFixed(2); 
+            eval( $("#quantity").val() ).toFixed(2)
         );
     }); 
 
