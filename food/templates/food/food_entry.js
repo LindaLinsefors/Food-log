@@ -1,7 +1,11 @@
+alert('Hej, js is running');
+
 $(document).ready(function(){
 
     $("#quantity").change(function(){
-        $("#quantity").val( eval( $("#quantity").val() ) );
+        $("#quantity").val( 
+            eval( $("#quantity").val() ).toFixed(2); 
+        );
     }); 
 
     $(".percent").change(function(){
