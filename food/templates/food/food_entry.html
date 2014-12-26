@@ -32,7 +32,9 @@
   </div>
         
   <div data-role="main" class="ui-content">
-    <form method="POST" name="form" id="form"> {% csrf_token %}
+    <form method="POST" name="form" id="form"
+        {% block action %} action="{% url 'new_food_entry' %}" {% endblock %}> 
+        {% csrf_token %}
 
         {% block diffrent_for_food_stuff %}
         <p>

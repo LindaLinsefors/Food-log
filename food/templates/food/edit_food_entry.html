@@ -8,6 +8,8 @@
         >Delete</a>
 {% endblock %}
 
+{% block action %} action="{% url 'edit_food_entry' food_entry.id %}" {% endblock %}
+
 {% block amount %} value="{{ food_entry.amount }}" {% endblock %}
 {% block quantity_formula %} value="{{ food_entry.quantity }}" {% endblock %}
 {% block quantity %} value="{{ quantity }}" {% endblock %}

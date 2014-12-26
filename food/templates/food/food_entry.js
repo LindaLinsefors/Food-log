@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
 
     $("#reset").click(function(){
-        $("#form").form();
+        $("#form").reset();
     });
 
     $("#quantity_formula").change(function(){
