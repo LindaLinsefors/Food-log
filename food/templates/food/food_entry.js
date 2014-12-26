@@ -2,6 +2,9 @@
 
 $(document).ready(function(){
 
+    $('.percent').css('width','10%').css('display','inline');
+
+
     $("#quantity_formula").change(function(){
         var quantity
         try { 

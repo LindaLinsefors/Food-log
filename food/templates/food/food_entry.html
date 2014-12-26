@@ -3,18 +3,35 @@
 <head>
     
     <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    -->
+
     <script src="{% url 'food_entry_js' %}"></script>
+   
+    <!-- 
+    <style>
+        .percent {
+            width: 2cm !important
+        }
+    </style>
     
 
 
-<!--
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
--->
-
+    <style type="text/css">
+        .ui-input-number{
+            width: 2cm !important;
+        }
+    </style>
+    -->
+ 
 
 </head>
 <body>
@@ -66,41 +83,49 @@
                 <td>Fruit:</td>
                 <td><input type="number" name="fruit" id="fruit" 
                         min="0" max="100" class="percent"
-                        {% block fruit %}{% endblock %}>%</td>
+                        {% block fruit %}{% endblock %}></td>
+                <td>%</td>
                 <td>Veg:</td>
                 <td><input type="number" name="veg" id="veg" 
                         min="0" max="100" class="percent"
-                        {% block veg %}{% endblock %}>%</td>
+                        {% block veg %}{% endblock %}></td>
+                <td>%</td>
             <tr>
             <tr>
                 <td>Dairy:</td>
                 <td><input type="number" name="dairy" id="dairy"
                         min="0" max="100" class="percent"
-                        {% block dairy %}{% endblock %}>%</td>
+                        {% block dairy %}{% endblock %}></td>
+                <td>%</td>
                 <td>Protein:</td>
                 <td><input type="number" name="protein" id="protein"
                         min="0" max="100" class="percent"
-                        {% block protein %}{% endblock %}>%</td>
+                        {% block protein %}{% endblock %}></td>
+                <td>%</td>
             <tr>
             <tr>
                 <td>Water:</td>
                 <td><input type="number" name="water" id="water"
                         min="0" max="100" class="percent"
-                        {% block water %}{% endblock %}>%</td>
+                        {% block water %}{% endblock %}></td>
+                <td>%</td>
                 <td>Startch:</td>
                 <td><input type="number" name="startch" id="startch"
                         min="0" max="100" class="percent"
-                        {% block startch %}{% endblock %}>%</td>
+                        {% block startch %}{% endblock %}></td>
+                <td>%</td>
             <tr>
             <tr>
                 <td>Junk:</td>
                 <td><input type="number" name="junk" id="junk"
                         min="0" max="100" class="percent"
-                        {% block junk %}{% endblock %}>%</td>
+                        {% block junk %}{% endblock %}></td>
+                <td>%</td>
                 <td>Unknown:</td>
                 <td><input type="number" name="unknown" id="unknown"
                         min="0" max="100" class="percent" 
-                        {% block unknown %} value=100 {% endblock %}>%</td>
+                        {% block unknown %} value=100 {% endblock %}></td>
+                <td>%</td>
             <tr>
         </table>
     </form>   
