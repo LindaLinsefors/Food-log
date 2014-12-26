@@ -2,6 +2,14 @@
 
 $(document).ready(function(){
 
+    $("#save").click(function(){
+        $("#form").save();
+    });
+
+    $("#reset").click(function(){
+        $("#form").form();
+    });
+
     $("#quantity_formula").change(function(){
         var quantity
         try { 

@@ -18,27 +18,22 @@
 </head>
 
 <body>
+<div data-role="page">
   <div data-role="header">
     <h1>{% block header %}New Food Entry{% endblock %}</h1>
+    <div data-role="navbar">
+        <ul>
+            <li><a id="save">Save</a></li>
+            <li><a id="reset">Reset</a></li>
+            <li><a href="{% url 'home' %}">Cancel</a></li>
+            <li>{% block delete %}<a> </a>{% endblock %}</li>
+        </ul>       
+    </div>
   </div>
+        
   <div data-role="main" class="ui-content">
     <form method="POST" name="form" id="form"> {% csrf_token %}
-        <div class="ui-grid-c">
-            <div class="ui-block-a">
-                <button type="submit" class="ui-btn">Save</button>
-            </div>
-            <div class="ui-block-b">
-                <button type="reset" class="ui-btn">Reset</button>
-            </div>
-            <div class="ui-block-c">
-                <a href="{% url 'home' %}" class="ui-btn">Cancel</a>
-            </div>
-            <div class="ui-block-d">
-                {% block delete %}
-                {% endblock %}
-            </div>       
-        </div>
-        
+
         {% block diffrent_for_food_stuff %}
         <p>
             Here be date and time
@@ -137,6 +132,7 @@
         </table>
     </form>
   </div>
+<div>
 </body>
 </html>
 

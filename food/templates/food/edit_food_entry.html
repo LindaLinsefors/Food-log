@@ -2,11 +2,11 @@
 
 {% block header %}Edit Food Entry{% endblock %}
 
-            {% block delete %}
-            <a href="{% url 'delete_food_entry' food_entry.id %}" 
-                onclick="return confirm('Are you sure you want to delete?');"
-                >Delete</a>
-            {% endblock %}
+{% block delete %}
+    <a href="{% url 'delete_food_entry' food_entry.id %}" 
+        onclick="return confirm('Are you sure you want to delete?');"
+        >Delete</a>
+{% endblock %}
 
 {% block amount %} value="{{ food_entry.amount }}" {% endblock %}
 {% block quantity_formula %} value="{{ food_entry.quantity }}" {% endblock %}
