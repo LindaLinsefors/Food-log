@@ -3,11 +3,11 @@
 $(document).ready(function(){
 
     $("#save").click(function(){
-        $("#form").save();
+        $("#form").submit();
     });
 
     $("#reset").click(function(){
-        $("#form").reset();
+        $("#form").trigger("reset");
     });
 
     $("#quantity_formula").change(function(){
