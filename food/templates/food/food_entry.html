@@ -16,22 +16,35 @@
     <script src="{% url 'food_entry_js' %}"></script>
 
 </head>
+
 <body>
+  <div data-role="header">
+    <h1>{% block header %}New food entry{% endblock %}</h1>
+  </div>
+  <div data-role="main" class="ui-content">
     <form method="POST" name="form" id="form"> {% csrf_token %}
-        <p>
-            <input type="submit" value="Save">
-            <input type="reset" value="Reset">
-            <a href="{% url 'home' %}">Cancel</a>
-            {% block delete %}
-            {% endblock %}
-        </p>
+        <div class="ui-grid-c">
+            <div class="ui-block-a">
+                <button type="submit" class="ui-btn">Save</button>
+            </div>
+            <div class="ui-block-b">
+                <button type="reset" class="ui-btn">Reset</button>
+            </div>
+            <div class="ui-block-c">
+                <a href="{% url 'home' %}" class="ui-btn">Cancel</a>
+            </div>
+            <div class="ui-block-d">
+                {% block delete %}
+                {% endblock %}
+            </div>       
+        </div>
         
         {% block diffrent_for_food_stuff %}
         <p>
             Here be date and time
         </p>
 
-        <table>
+        <table style="width:100%">
             <tr>
                 <td>Amount:</td>
                 <td><input type="text" name="amount" id="amount" maxlength="30" required 
@@ -39,8 +52,11 @@
             </tr>
         </table>
         <table style="width:100%">
+            <col width="70%">
+            <col width="5%">
+            <col width="25%">
             <tr>
-                <td><input type="text" name="quantity_formula" id="quantity_formula"
+                <td style="witdh:10px"><input type="text" name="quantity_formula" id="quantity_formula"
                     {% block quantity_formula %}{% endblock %}></td>
                 <td> = </td>
                 <td><input type="number" step="0.01" name="quantity" id="quantity" required 
@@ -59,7 +75,7 @@
                 <option value="{{ food_stuff.name }}">
             {% endfor %}
             </datalist>
-                <td><input type="button" id="get_info" value="Get info"></td>
+                <td><button type="button" id="get_info">Get info</button></td>
             </tr>
         </table>
         {% endblock %}
@@ -119,7 +135,8 @@
                 <td>%</td>
             <tr>
         </table>
-    </form>   
+    </form>
+  </div>
 </body>
 </html>
 
