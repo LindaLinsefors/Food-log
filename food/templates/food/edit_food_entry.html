@@ -3,9 +3,9 @@
 {% block header %}Edit Food Entry{% endblock %}
 
 {% block delete %}
-    <a href="{% url 'delete_food_entry' food_entry.id %}" 
+    <li><a href="{% url 'delete_food_entry' food_entry.id %}" 
         onclick="return confirm('Are you sure you want to delete?');"
-        >Delete</a>
+        >Delete</a></li>
 {% endblock %}
 
 {% block action %} action="{% url 'edit_food_entry' food_entry.id %}" {% endblock %}
