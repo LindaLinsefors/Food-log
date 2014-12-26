@@ -1,3 +1,4 @@
+from __future__ import division 
 from django.shortcuts import get_object_or_404, render
 from django import forms
 from models import FoodEntry, FoodStuff
@@ -5,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist 
 from django.core import serializers
+
 
 # Create your views here.
 
@@ -32,8 +34,12 @@ def save(food_entry, post):
             setattr(food_entry, food_type, int(float(post[food_type])) )
             setattr(food_stuff, food_type, int(float(post[food_type])) )
 
+    if post['quantity_formula'] == '':
+        food_entry.quantity = float(post['quantity'])
+    else:
+        food_entry.quantity = eval(post['quantity_formula'])
+
     food_entry.amount = post['amount']
-    food_entry.quantity = float(post['quantity'])
     food_entry.food_stuff = post['food_stuff']
     food_entry.ingredients = post['ingredients']
     food_entry.save()
@@ -62,10 +68,12 @@ def edit_food_entry(request, id):
     if request.method == 'POST':
         save( food_entry, request.POST )
         return HttpResponseRedirect( reverse('home') )
-        
+
+             
     return render(  request, 'food/edit_food_entry.html',
                    {'food_stuffs': FoodStuff.objects.all(), 
-                    'food_entry': food_entry                }   )   
+                    'food_entry': food_entry,                
+                    'quantity': round(food_entry.quantity,2),    } )   
 
 
 def delete_food_entry(request, id):
