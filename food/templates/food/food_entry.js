@@ -3,10 +3,21 @@
 $(document).ready(function(){
 
     $("#quantity_formula").change(function(){
-        $("#quantity").val( 
-            eval( $("#quantity_formula").val() ).toFixed(2)
-        );
+        var quantity
+        try { 
+            quantity = eval( $("#quantity_formula").val() ).toFixed(2)
+        } 
+        catch(err) {
+            quantity = ""
+        }
+        finally {
+            $("#quantity").val( quantity );
+        }
     });   
+
+    $("#quantity").change(function(){
+        $("#quantity_formula").val( "" );
+    }); 
 
     $(".percent").change(function(){
         $("#unknown").val(
