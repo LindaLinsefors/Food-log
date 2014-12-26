@@ -19,7 +19,7 @@
 
 <body>
   <div data-role="header">
-    <h1>{% block header %}New food entry{% endblock %}</h1>
+    <h1>{% block header %}New Food Entry{% endblock %}</h1>
   </div>
   <div data-role="main" class="ui-content">
     <form method="POST" name="form" id="form"> {% csrf_token %}
@@ -68,7 +68,7 @@
             <tr>
                 <td>Type:</td>
                 <td><input list="food_stuffs" name="food_stuff" id="food_stuff"
-                    autocomplete="off" maxlength="30" 
+                    autocomplete="off" maxlength="30" required
                     {% block food_stuff %}{% endblock %}></td>
             <datalist id="food_stuffs">
             {% for food_stuff in food_stuffs %}
