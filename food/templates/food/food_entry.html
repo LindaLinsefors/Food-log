@@ -23,9 +23,9 @@
     <h1>{% block header %}New Food Entry{% endblock %}</h1>
     <div data-role="navbar">
         <ul>
-            <li><a id="save">Save</a></li>
-            <li><a id="reset">Reset</a></li>
+            <li><input type="submit" form="form"  value="Save"></li>
             <li><a href="{% url 'home' %}">Cancel</a></li>
+            <li><input type="reset" form="form"  value="Reset"></li>
             <li>{% block delete %}<a> </a>{% endblock %}</li>
         </ul>       
     </div>
@@ -35,6 +35,8 @@
     <form method="POST" name="form" id="form"
         {% block action %} action="{% url 'new_food_entry' %}" {% endblock %}> 
         {% csrf_token %}
+        <input type="submit" value="Save">
+        <input type="reset" value="Reset">
 
         {% block diffrent_for_food_stuff %}
         <p>
