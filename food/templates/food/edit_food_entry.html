@@ -1,5 +1,7 @@
 {% extends "food/food_entry.html" %}  
 
+{% block header %}Edit Food Entry{% endblock %}
+
             {% block delete %}
             <a href="{% url 'delete_food_entry' food_entry.id %}" 
                 onclick="return confirm('Are you sure you want to delete?');"
