@@ -6,7 +6,7 @@ $(document).ready(function(){
         $("#quantity").val( 
             eval( $("#quantity_formula").val() ).toFixed(2)
         );
-    }); 
+    });   
 
     $(".percent").change(function(){
         $("#unknown").val(
