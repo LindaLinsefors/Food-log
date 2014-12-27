@@ -25,14 +25,14 @@
         <ul>
             <li><input type="submit" form="form"  value="Save"></li>
             <li><input type="reset" form="form"  value="Reset"></li>
-            <li><a href="{% url 'home' %}">Cancel</a></li>
+            <li><a href="{% url 'home' %}" data-ajax="false" >Cancel</a></li>
             {% block delete %}{% endblock %}
         </ul>       
     </div>
   </div>
         
   <div data-role="main" class="ui-content">
-    <form method="POST" name="form" id="form"
+    <form method="POST" data-ajax="false" name="form" id="form"
         {% block action %} action="{% url 'new_food_entry' %}" {% endblock %}> 
         {% csrf_token %}
 

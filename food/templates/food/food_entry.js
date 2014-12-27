@@ -1,5 +1,4 @@
 
-
 $(document).ready(function(){
 
     $("#quantity_formula").change(function(){
