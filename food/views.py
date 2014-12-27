@@ -34,12 +34,8 @@ def save(food_entry, post):
             setattr(food_entry, food_type, int(float(post[food_type])) )
             setattr(food_stuff, food_type, int(float(post[food_type])) )
 
-    if post['quantity_formula'] == '':
-        food_entry.quantity = float(post['quantity'])
-    else:
-        food_entry.quantity = eval(post['quantity_formula'])
-
     food_entry.amount = post['amount']
+    food_entry.quantity = float(post['quantity'])
     food_entry.food_stuff = post['food_stuff']
     food_entry.ingredients = post['ingredients']
     food_entry.save()

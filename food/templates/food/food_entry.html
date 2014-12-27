@@ -49,14 +49,13 @@
             </tr>
         </table>
         <table style="width:100%">
-            <col width="75%">
+            <!--<col width="75%">
             <col width="0%">
-            <col width="25%">
+            <col width="25%">-->
             <tr>
-                <td style="witdh:10px"><input type="text" name="quantity_formula" id="quantity_formula"
-                    {% block quantity_formula %}{% endblock %}></td>
+                <td style="witdh:10px"><input type="text" name="quantity_formula" id="quantity_formula"></td>
                 <td> = </td>
-                <td><input type="number" step="0.01" name="quantity" id="quantity" required 
+                <td><input type="text" pattern="[\d]+(.[\d]*)?" name="quantity" id="quantity" required 
                     {% block quantity %}{% endblock %}></td>
             </tr>
         </table>        

@@ -4,7 +4,7 @@ $(document).ready(function(){
     $("#quantity_formula").change(function(){
         var quantity
         try { 
-            quantity = eval( $("#quantity_formula").val() ).toFixed(2)
+            quantity = eval( $("#quantity_formula").val() )
         } 
         catch(err) {
             quantity = ""
