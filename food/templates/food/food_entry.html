@@ -37,9 +37,15 @@
         {% csrf_token %}
 
         {% block diffrent_for_food_stuff %}
-        <p>
-            Here be date and time
-        </p>
+
+        <table style="width:100%">
+            <tr>
+                <td><input type="date" name="date" id="date" required
+                    value="{{ date }}"></td>
+                <td><input type="time" name="time" id="time" required
+                    value="{{ time }}"></td>
+            </tr>
+        </table>
 
         <table style="width:100%">
             <tr>

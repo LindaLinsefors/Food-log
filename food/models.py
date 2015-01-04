@@ -49,7 +49,7 @@ class FoodEntry(Food):
         #ordering = ['date']
         #verbose_name_plural = _('food entries')
 
-    # date = models.DateTimeField( default=timezone.now() )
+    datetime = models.DateTimeField()
     amount = models.CharField( max_length=30 )
     quantity = models.FloatField( validators=validate_poss )
   

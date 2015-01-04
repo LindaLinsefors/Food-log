@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist 
 from django.core import serializers
+import datetime
 
 
 # Create your views here.
@@ -34,6 +35,10 @@ def save(food_entry, post):
             setattr(food_entry, food_type, int(float(post[food_type])) )
             setattr(food_stuff, food_type, int(float(post[food_type])) )
 
+    datetime_string = post['date']+' '+post['time']
+    food_entry.datetime = datetime.datetime.strptime(
+                                datetime_string, "%Y-%m-%d %H:%M")
+
     food_entry.amount = post['amount']
     food_entry.quantity = float(post['quantity'])
     food_entry.food_stuff = post['food_stuff']
@@ -54,8 +59,13 @@ def new_food_entry(request):
         save( FoodEntry(), request.POST )
         return HttpResponseRedirect( reverse('home') )
 
+    now = datetime.datetime.now()
+
     return render(  request, 'food/food_entry.html',
-                   {'food_stuffs': FoodStuff.objects.all() }   )
+                   {'food_stuffs': FoodStuff.objects.all(),
+                    'date': str(now.date()),
+                    'time': str(now.hour)+':'+str(now.minute),
+                   } )   
 
 
 def edit_food_entry(request, id):
@@ -69,7 +79,10 @@ def edit_food_entry(request, id):
     return render(  request, 'food/edit_food_entry.html',
                    {'food_stuffs': FoodStuff.objects.all(), 
                     'food_entry': food_entry,                
-                    'quantity': round(food_entry.quantity,2),    } )   
+                    'quantity': round(food_entry.quantity,2),    
+                    'date': str( food_entry.datetime.date() ),
+                    'time': str(food_entry.datetime.hour)+':'+str(food_entry.datetime.minute),
+                   } )   
 
 
 def delete_food_entry(request, id):
