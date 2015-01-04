@@ -56,13 +56,19 @@ class FoodEntry(Food):
     food_stuff = models.CharField(max_length=50)
     
     def __str__(self):
-        #return str(self.date) + ': ' + self.amount_text
-        return str(self.food_stuff) + ', ' + str(self.amount)
+        return (self.datetime.strftime("%Y-%m-%d %H:%M")
+                +' - '
+                +str(self.food_stuff)
+                +', '
+                +str(self.amount)
+               )
 
     def __unicode__(self):          # for Python 2 
-        #return unicode(self.date) + u': ' + unicode(self.amount_text)
-        return unicode(self.food_stuff) + u', ' + unicode(self.amount) 
-
-
+        return (unicode( self.datetime.strftime("%Y-%m-%d %H:%M") )
+                +u' - '
+                +unicode(self.food_stuff)
+                +u', '
+                +unicode(self.amount)
+               )
 
 
