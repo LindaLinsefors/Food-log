@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Food group', 'number of bowls'],
+          ['Fruit',     11],
+          ['Veg',      2],
+          ['Dairy',  2],
+          ['Protein', 2],
+          ['Starch',      2],
+          ['Junk',  2],
+          ['Unknown', 2],
+        ]);
+
+        var options = {
+          chartArea: {width:'80%',height:'100%'}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="piechart" style="width: 100%; height: 200%;"></div>
+  </body>
+</html>
+

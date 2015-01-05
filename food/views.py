@@ -9,7 +9,7 @@ from django.core import serializers
 import datetime
 
 
-# Create your views here.
+# Home
 
 def home(request):
     food_entries = FoodEntry.objects.all()
@@ -19,6 +19,19 @@ def home(request):
                   {'food_entries': FoodEntry.objects.all(),
                    'food_stuffs' : FoodStuff.objects.all() } )
 
+
+
+# Data
+
+def data(request):
+    return render(request, 'food/data.html')
+
+
+def chart_js(request):
+    return render(request, 'food/Chart.js' )
+
+
+# Imput
 
 def save(food_entry, post):
     try:
@@ -63,8 +76,8 @@ def new_food_entry(request):
 
     return render(  request, 'food/food_entry.html',
                    {'food_stuffs': FoodStuff.objects.all(),
-                    'date': str(now.date()),
-                    'time': str(now.hour)+':'+str(now.minute),
+                    'date': now.strftime("%Y-%m-%d"),
+                    'time': now.strftime("%H:%M"),
                    } )   
 
 
@@ -80,8 +93,8 @@ def edit_food_entry(request, id):
                    {'food_stuffs': FoodStuff.objects.all(), 
                     'food_entry': food_entry,                
                     'quantity': round(food_entry.quantity,2),    
-                    'date': str( food_entry.datetime.date() ),
-                    'time': str(food_entry.datetime.hour)+':'+str(food_entry.datetime.minute),
+                    'date': food_entry.datetime.strftime("%Y-%m-%d"),
+                    'time': food_entry.datetime.strftime("%H:%M"),
                    } )   
 
 
