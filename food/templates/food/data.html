@@ -13,13 +13,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     -->
 
-    <script src="{% url 'chart_js' %}"></script>
+    {% load staticfiles %}
+    <script src="{% static 'Chart.js' %}"></script>
 
     <script>
     $(document).ready(function(){
         // Get the context of the canvas element we want to select
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var myNewChart = new Chart(ctx).PolarArea(data);
+
 
         var data = [
             {
@@ -52,8 +52,11 @@
                 highlight: "#616774",
                 label: "Dark Grey"
             }
-
         ];
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myNewChart = new Chart(ctx).PolarArea(data);
+
     });
     </script>
 

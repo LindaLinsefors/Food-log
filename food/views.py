@@ -27,8 +27,6 @@ def data(request):
     return render(request, 'food/data.html')
 
 
-def chart_js(request):
-    return render(request, 'food/Chart.js' )
 
 
 # Imput

@@ -32,8 +32,6 @@ urlpatterns = patterns('',
     url(r'^js/$',
             'food.views.food_entry_js', name='food_entry_js'),
 
-    url(r'^chart/$',
-            'food.views.chart_js', name='chart_js'),
 
     # Admin    
     url(r'^admin/', include(admin.site.urls)),
