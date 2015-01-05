@@ -39,23 +39,11 @@
                 color: "#FDB45C",
                 highlight: "#FFC870",
                 label: "Yellow"
-            },
-            {
-                value: 40,
-                color: "#949FB1",
-                highlight: "#A8B3C5",
-                label: "Grey"
-            },
-            {
-                value: 120,
-                color: "#4D5360",
-                highlight: "#616774",
-                label: "Dark Grey"
             }
         ];
 
         var ctx = document.getElementById("myChart").getContext("2d");
-        var myNewChart = new Chart(ctx).PolarArea(data);
+        var myNewChart = new Chart(ctx).Pie(data);
 
     });
     </script>
