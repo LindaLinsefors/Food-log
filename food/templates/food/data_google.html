@@ -2,7 +2,7 @@
 <html lang="en">
 
 <html>
-  <head>
+<head>
 
     <meta charset="utf-8">
 
@@ -30,7 +30,7 @@
         ]);
 
         var options = {
-          chartArea: {width:'80%',height:'100%'}
+          /* chartArea: {width:'80%',height:'100%'} */
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -38,10 +38,24 @@
         chart.draw(data, options);
       }
     </script>
-  </head>
+</head>
 
-  <body>
-    <div id="piechart" style="width: 100%; height: 200%;"></div>
-  </body>
+<body>
+<div data-role="page">
+  <div data-role="header">
+    <h1>Data</h1>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="{% url 'new_food_entry' %}" data-ajax="false" >New</a></li>
+            <li><a href="{% url 'home' %}" data-ajax="false" >List</a></li>
+            {% block delete %}{% endblock %}
+        </ul>       
+    </div>
+  </div>
+  <div data-role="main" class="ui-content">
+    <div id="piechart" style="width: 100%;"></div>
+  </div>
+</body>
+
 </html>
 

@@ -24,7 +24,7 @@ def home(request):
 # Data
 
 def data(request):
-    return render(request, 'food/data.html')
+    return render(request, 'food/data_google.html')
 
 
 
