@@ -15,6 +15,13 @@
 
     <script src="{% url 'food_entry_js' %}"></script>
 
+
+    <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
+
 </head>
 
 <body>
@@ -25,7 +32,7 @@
         <ul>
             <li><input type="submit" form="form"  value="Save"></li>
             <li><input type="reset" form="form"  value="Reset"></li>
-            <li><a href="{% url 'home' %}" data-ajax="false" >Cancel</a></li>
+            <li><input type="button" onclick="goBack()" value="Cancel"></li>
             {% block delete %}{% endblock %}
         </ul>       
     </div>
