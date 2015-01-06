@@ -46,7 +46,9 @@
     <h1>Data</h1>
     <div data-role="navbar">
         <ul>
-            <li><a href="{% url 'new_food_entry' %}" data-ajax="false" >New</a></li>
+            <li><a href="{% url 'new_food_entry' %}" data-ajax="false" >New Food Entry</a></li>
+            <li><a href="{% url 'new_food_stuff' %}" data-ajax="false" >New Food Stuff</a></li>
+            <li><a href="{% url 'menu' %}" data-ajax="false" >Menu</a></li>
             <li><a href="{% url 'home' %}" data-ajax="false" >List</a></li>
             {% block delete %}{% endblock %}
         </ul>       
