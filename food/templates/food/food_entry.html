@@ -6,7 +6,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'themes/riia-theme.min.css' %}" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+
+    <!--
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    -->
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -21,7 +27,7 @@
 </head>
 
 <body>
-<div data-role="page">
+<div data-role="page" data-theme="b">
   <div class="ui-bar ui-bar-b" align="center">
     <h1>{% block header %}New Food Entry{% endblock %}</h1>
   </div>
@@ -37,7 +43,7 @@
 
 
         
-  <div data-role="main" class="ui-content">
+  <div data-role="main" class="ui-content" data-theme="b">
     <form method="POST" data-ajax="false" name="form" id="form"> 
         {% csrf_token %}
 

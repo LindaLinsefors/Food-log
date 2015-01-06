@@ -126,7 +126,7 @@ def edit_food_stuff(request, id):
 
     if request.method == 'POST':
         save_food_stuff( request.POST )
-        return HttpResponseRedirect( reverse('home') )
+        return HttpResponseRedirect( reverse('data') )
              
     return render(  request, 'food/edit_food_stuff.html',
                    {'food_stuffs': FoodStuff.objects.all(), 
@@ -137,7 +137,7 @@ def new_food_stuff(request):
 
     if request.method == 'POST':
         save_food_stuff( request.POST )
-        return HttpResponseRedirect( reverse('home') )
+        return HttpResponseRedirect( reverse('data') )
              
     return render(  request, 'food/edit_food_stuff.html',
                    {'food_stuffs': FoodStuff.objects.all(),              
