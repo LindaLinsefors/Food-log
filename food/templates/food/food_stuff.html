@@ -5,9 +5,10 @@
 {% block header %}New/Edit Food Type{% endblock %}
 
 {% block delete %}
-    <li><a href="{% url 'delete_food_stuff' %}" 
+    <li><input type="submit" form="form" value="Delete"
+        formaction="{% url 'delete_food_stuff' %}" 
         onclick="return confirm('Are you sure you want to delete?');"
-        data-ajax="false">Delete</a></li>
+        data-ajax="false"></li>
 {% endblock %}
 
 

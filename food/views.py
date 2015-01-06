@@ -164,7 +164,7 @@ def save_food_stuff(post):
 
 def delete_food_stuff(request):
     try:
-        food_stuff = FoodStuff.objects.get( name=post['food_stuff'] )
+        food_stuff = FoodStuff.objects.get( name=request.POST['food_stuff'] )
     except ObjectDoesNotExist:
         pass
     else:

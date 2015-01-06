@@ -3,13 +3,17 @@
 {% block header %}Edit Food Entry{% endblock %}
 
 {% block delete %}
-    <li><a href="{% url 'delete_food_entry' food_entry.id %}" 
+    <li><a href="{% url 'delete_food_entry' %}" 
         onclick="return confirm('Are you sure you want to delete?');"
         data-ajax="false">Delete</a></li>
 {% endblock %}
 
+{% block amount %} value="{{ food_entry.amount }}" {% endblock %}
+{% block quantity %} value="{{ food_entry.quantity }}" {% endblock %}
 
-{% block ingredients %} value="{{ food_entry.ingredients }}" {% endblock %}
+{% block food_stuff %} value="{{ food_entry.food_stuff }}" {% endblock %}
+{% block ingredients %}{{ food_entry.ingredients }}{% endblock %}
+
 {% block fruit %} value="{{ food_entry.fruit }}" {% endblock %}
 {% block veg %} value="{{ food_entry.veg }}" {% endblock %}
 {% block dairy %} value="{{ food_entry.dairy }}" {% endblock %}

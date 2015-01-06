@@ -3,8 +3,8 @@
 
 {% block amount %} value="{{ food_stuff.amount }}" {% endblock %}
 {% block quantity %} value="{{ food_stuff.quantity }}" {% endblock %}
-{% block food_stuff %} value="{{ food_stuff.food_stuff }}" {% endblock %}
-{% block ingredients %} value="{{ food_stuff.ingredients }}" {% endblock %}
+{% block food_stuff %} value="{{ food_stuff.name }}" {% endblock %}
+{% block ingredients %}{{ food_stuff.ingredients }}{% endblock %}
 {% block fruit %} value="{{ food_stuff.fruit }}" {% endblock %}
 {% block veg %} value="{{ food_stuff.veg }}" {% endblock %}
 {% block dairy %} value="{{ food_stuff.dairy }}" {% endblock %}
