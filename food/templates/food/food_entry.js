@@ -1,6 +1,11 @@
 
 $(document).ready(function(){
 
+    $("#cancel").click(function(){
+        window.history.back()
+    });
+
+
     $("#quantity_formula").change(function(){
         var quantity
         try { 
