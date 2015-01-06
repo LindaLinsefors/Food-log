@@ -21,6 +21,12 @@ def home(request):
 
 
 
+# Menu
+
+def menu(request):
+    return render(request, 'food/menu.html')
+
+
 # Data
 
 def data(request):

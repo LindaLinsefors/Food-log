@@ -6,6 +6,9 @@ urlpatterns = patterns('',
     # Home
     url(r'^$', 'food.views.home', name='home'),
 
+    # Menu
+    url(r'^menu$', 'food.views.menu', name='menu'),
+
     # Data
     url(r'^data$', 'food.views.data',  name='data'),
 
