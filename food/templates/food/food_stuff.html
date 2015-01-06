@@ -4,6 +4,12 @@
 
 {% block header %}New/Edit Food Type{% endblock %}
 
+{% block delete %}
+    <li><a href="{% url 'delete_food_stuff' %}" 
+        onclick="return confirm('Are you sure you want to delete?');"
+        data-ajax="false">Delete</a></li>
+{% endblock %}
+
 
 {% block diffrent_for_food_stuff %}
 <p> If you enter a name that allredy exists you will save over the information under this name. </p>

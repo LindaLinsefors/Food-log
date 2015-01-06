@@ -38,8 +38,7 @@
 
         
   <div data-role="main" class="ui-content">
-    <form method="POST" data-ajax="false" name="form" id="form"
-        {% block action %} action="{% url 'new_food_entry' %}" {% endblock %}> 
+    <form method="POST" data-ajax="false" name="form" id="form"> 
         {% csrf_token %}
 
         {% block diffrent_for_food_stuff %}

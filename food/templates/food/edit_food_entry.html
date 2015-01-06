@@ -8,11 +8,7 @@
         data-ajax="false">Delete</a></li>
 {% endblock %}
 
-{% block action %} action="{% url 'edit_food_entry' food_entry.id %}" {% endblock %}
 
-{% block amount %} value="{{ food_entry.amount }}" {% endblock %}
-{% block quantity %} value="{{ food_entry.quantity }}" {% endblock %}
-{% block food_stuff %} value="{{ food_entry.food_stuff }}" {% endblock %}
 {% block ingredients %} value="{{ food_entry.ingredients }}" {% endblock %}
 {% block fruit %} value="{{ food_entry.fruit }}" {% endblock %}
 {% block veg %} value="{{ food_entry.veg }}" {% endblock %}
