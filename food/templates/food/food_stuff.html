@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 
-<form method="POST" >
-    <input type="submit" value="Save">
-    <a href="{% url 'home' %}">Cancel</a>
-    {% if food_stuff %}
-    <a href="{% url 'delete_food_stuff' food_stuff.id %}"
-        onclick="return confirm('Are you sure you want to delete?');"
-        >Delete</a>
-    {% endif %}
-    {% csrf_token %}
-    {{ class_form.as_p }}
-</form>
+{% extends "food/food_entry.html" %}  
 
-<p>This form is for looking at and editing food types. It is just here for testing purpoes. The form will not check that you filed in things correctly. If you fill in something odd this may or may not crach the program.</p>
+{% block header %}New/Edit Food Type{% endblock %}
+
+
+{% block diffrent_for_food_stuff %}
+<p> If you enter a name that allredy exists you will save over the information under this name. </p>
+{% endblock %}
+
+{% block food_stuff_name_label %}Name:{% endblock %}
+
