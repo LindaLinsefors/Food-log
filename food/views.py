@@ -133,7 +133,7 @@ def edit_food_stuff(request, id):
                     'food_stuff': food_stuff,                
                    } )   
 
-def new_food_stuff(request, id):
+def new_food_stuff(request):
 
     if request.method == 'POST':
         save_food_stuff( request.POST )

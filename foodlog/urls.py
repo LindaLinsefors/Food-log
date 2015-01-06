@@ -3,11 +3,13 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
 
-    # Home
-    url(r'^$', 'food.views.home', name='home'),
+    # Lists
+    url(r'^list$', 'food.views.home', name='food_stuff_list'),
+    url(r'^list$', 'food.views.home', name='food_entry_list'),
 
     # Menu
-    url(r'^menu$', 'food.views.menu', name='menu'),
+    url(r'^$', 'food.views.menu', name='menu'),
+    url(r'^$', 'food.views.menu', name='home'),
 
     # Data
     url(r'^data$', 'food.views.data',  name='data'),
