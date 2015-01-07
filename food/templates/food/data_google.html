@@ -24,13 +24,13 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Food group', 'number of bowls'],
-          ['Fruit',     11],
-          ['Veg',      2],
-          ['Dairy',  2],
-          ['Protein', 2],
-          ['Starch',      2],
-          ['Junk',  2],
-          ['Unknown', 2],
+          ['Fruit',     {{ day_total.fruit }}   ],
+          ['Veg',       {{ day_total.veg }}     ],
+          ['Dairy',     {{ day_total.dairy }}   ],
+          ['Protein',   {{ day_total.protein }} ],
+          ['Starch',    {{ day_total.starch }}  ],
+          ['Junk',      {{ day_total.junk }}    ],
+          ['Unknown',   {{ day_total.unknown }} ],
         ]);
 
         var options = {

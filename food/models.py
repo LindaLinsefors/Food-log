@@ -45,8 +45,8 @@ class FoodStuff(Food):
 
 
 class FoodEntry(Food):
-    #class Meta:
-        #ordering = ['date']
+    class Meta:
+        ordering = ['-datetime']
         #verbose_name_plural = _('food entries')
 
     datetime = models.DateTimeField()
@@ -72,3 +72,48 @@ class FoodEntry(Food):
                )
 
 
+class Total(models.Model):
+    class Meta:
+        abstract = True
+
+    fruit = models.FloatField()
+    dairy = models.FloatField()
+    water = models.FloatField()
+    junk  = models.FloatField()
+    veg   = models.FloatField()
+    protein = models.FloatField()
+    startch = models.FloatField()
+    unknown = models.FloatField() 
+    
+    def no_water(self):
+        return (  self.fruit 
+                + self.dairy 
+                + self.junk 
+                + self.veg 
+                + self.protein 
+                + self.startch 
+                + self.unknown )
+
+
+class DayTotal(Total):
+    class Meta:
+        ordering = ['-date']
+    date = models.DateField( unique=True )
+
+
+class MonthTotal(Total):
+    class Meta:
+        unique_together = (('month', 'year'),)
+        ordering = ['-year', '-month']
+    month = models.SmallIntegerField()
+    year = models.SmallIntegerField()
+    days = models.SmallIntegerField()
+    last_updated = models.DateField()
+
+
+class YearTotal(Total):
+    class Meta:
+        ordering = ['-year']
+    year = models.SmallIntegerField( unique=True )
+    days = models.SmallIntegerField()
+    last_updated = models.DateField()
