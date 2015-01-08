@@ -92,30 +92,21 @@ def save_day_total( date ):
     except ObjectDoesNotExist: 
         day_total = DayTotal( date=date )
 
-    food_entries = FoodEntry.objects.raw('''
-                        SELECT id,
-                        fruit * quantity / 100 AS fruit
-                        FROM food_FoodEntry
-                        ''')
+    
+    #food_entries = FoodEntry.objects.raw('''
+    #                    SELECT id,
+    #                    fruit * quantity / 100 AS fruit
+    #                    FROM food_FoodEntry
+    #                    ''')
                                                 
 
 
 
-    entries = FoodEntry.objects.filter( datetime__year=date.year,
+    food_entries = FoodEntry.objects.filter( datetime__year=date.year,
                                         datetime__month=date.month,
-                                        datetime__day=date.day,
-                ).extra( select={   
-                                'fruit_amount': 'fruit * amount / 100',
-                                'dairy_amount': 'dairy * amount / 100',
-                                'water_amount': 'water * amount / 100',
-                                'junk_amount':  'junk * amount / 100',
-                                'veg_amount':   'veg * amount / 100',
-                                'protein_amount': 'protein * amount / 100',
-                                'startch_amount': 'startch * amount / 100',
-                                'unknown_amount': 'unknown * amount / 100',
-                                } ) 
-    import pdb; pdb.set_trace()
-    if entries.count() == 0:
+                                        datetime__day=date.day,     ) 
+
+    if food_entries.count() == 0:
         try:
             day_total.delete()
         except:
@@ -123,14 +114,24 @@ def save_day_total( date ):
         finally:
             return False
         
-    total.fruit = entries.aggregate( Sum('fruit_amount') ).values()[0]
-    total.dairy = entries.aggregate( Sum('dairy_amount') ).values()[0]
-    total.water = entries.aggregate( Sum('water_amount') ).values()[0]
-    total.junk  = entries.aggregate( Sum('junk_amount')  ).values()[0]
-    total.veg   = entries.aggregate( Sum('veg_amount')   ).values()[0]
-    total.protein = entries.aggregate( Sum('protein_amount') ).values()[0]
-    total.startch = entries.aggregate( Sum('startch_amount') ).values()[0]
-    total.unknown = entries.aggregate( Sum('unknown_amount') ).values()[0]
+    day_total.fruit = 0
+    day_total.dairy = 0
+    day_total.water = 0
+    day_total.junk  = 0
+    day_total.veg   = 0
+    day_total.protein = 0
+    day_total.startch = 0
+    day_total.unknown = 0
+
+    for food_entry in food_entries:
+        day_total.fruit += food_entry.fruit * food_entry.quantity / 100
+        day_total.dairy += food_entry.dairy * food_entry.quantity / 100
+        day_total.water += food_entry.water * food_entry.quantity / 100
+        day_total.junk  += food_entry.junk * food_entry.quantity / 100
+        day_total.veg   += food_entry.veg * food_entry.quantity / 100
+        day_total.protein += food_entry.protein * food_entry.quantity / 100
+        day_total.startch += food_entry.startch * food_entry.quantity / 100
+        day_total.unknown += food_entry.unknown * food_entry.quantity / 100
 
     day_total.save()
 
