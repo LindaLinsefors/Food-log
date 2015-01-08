@@ -100,6 +100,11 @@ class DayTotal(Total):
         ordering = ['-date']
     date = models.DateField( unique=True )
 
+    def __str__(self):
+        return str(self.date)
+    def __unicode__(self):          # for Python 2 
+        return unicode(self.date)
+
 
 class MonthTotal(Total):
     class Meta:
@@ -110,6 +115,11 @@ class MonthTotal(Total):
     days = models.SmallIntegerField()
     last_updated = models.DateField()
 
+    def __str__(self):
+        return str(self.month)+'-'+str(self.year)
+    def __unicode__(self):          # for Python 2 
+        return unicode(self.month)+u'-'+unicode(self.year)
+
 
 class YearTotal(Total):
     class Meta:
@@ -117,3 +127,8 @@ class YearTotal(Total):
     year = models.SmallIntegerField( unique=True )
     days = models.SmallIntegerField()
     last_updated = models.DateField()
+
+    def __str__(self):
+        return str(self.year)
+    def __unicode__(self):          # for Python 2 
+        return unicode(self.year)
