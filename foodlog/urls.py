@@ -11,6 +11,9 @@ urlpatterns = patterns('',
     url(r'^$', 'food.views.menu', name='menu'),
     url(r'^$', 'food.views.menu', name='home'),
 
+    # Update
+    url(r'^update$', 'food.views.update',  name='update'),
+
     # Data
     url(r'^data$', 'food.views.data',  name='data'),
 

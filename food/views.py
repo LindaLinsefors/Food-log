@@ -84,7 +84,7 @@ def data(request):
 
 
 
-# Totals
+# Save Totals
 
 def save_day_total( date ):
     try:
@@ -207,6 +207,65 @@ def save_year_total(year):
 
     return True
 
+
+# Update Totals
+
+def update_month(year, month):
+    date = datetime.date(year, month, 1)
+    while date.month == month:
+        save_day_total( date )
+        date += datetime.timedelta( days=1 )
+
+    save_month_total(year, month)
+    save_year_total(year)
+
+def update_year(year):
+    date = datetime.date(year, 1, 1)
+    while date.year == year:
+        save_day_total( date )
+        date += datetime.timedelta( days=1 )
+
+    for month in range(1,13):
+        save_month_total(year, month)
+    save_year_total(year)    
+
+
+month_dict = {  'January':1, 
+                'February':2, 
+                'March':3, 
+                'April':4, 
+                'May':5, 
+                'June':6, 
+                'July':7, 
+                'August':8, 
+                'September':9,
+                'October':10, 
+                'November':11,
+                'December':12,  }
+
+
+
+def update(request):
+    if request.method == 'POST':
+
+        if request.POST['month'] == 'All':
+            update_year(request.POST['year'])
+
+            message = ( 'All calculations for '
+                        +str(request.POST['year'])
+                        +' are uppdated'            )
+        else:
+            update_month(   request.POST['year'],
+                            month_dict[ request.POST['month'] ] )
+
+            message = ( 'All calculations for '
+                        +request.POST['month']
+                        +' '
+                        +str(request.POST['year'])
+                        +' are uppdated'            )
+    else:
+        message='This app is suposed to uppdate all calculations automatically when needed. If you for some reason suspect that this has not happen, you can use this page to manualy ask for re-calculations.'
+    return render( request, 'food/update.html', {'message': message} )
 
 
 

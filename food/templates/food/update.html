@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'themes/riia-theme.min.css' %}" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+
+    <!--
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    -->
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    -->
+
+
+</head>
+
+<body>
+<div data-role="page" data-theme="b">
+  <div class="ui-bar ui-bar-b" align="center">
+    <h1>Uppdate calculations</h1>
+  </div>
+
+    <div data-role="navbar">
+        <ul>
+            <li><input type="submit" form="form"  value="Uppldate"></li>
+            <li><input type="button" id="cancel" value="Cancel"
+                    onclick="window.history.back()"></li> 
+            <li><a href="{% url 'menu' %}" data-ajax="false" >Menu</a></li>
+            <li><a href="{% url 'data' %}" data-ajax="false" >Data</a></li>
+        </ul>       
+    </div>
+
+
+        
+  <div data-role="main" class="ui-content" data-theme="b">
+    <form method="POST" data-ajax="false" name="form" id="form"> 
+        
+    </form>
+
+    <p>{{ message }}</p>
+  </div>
+<div>
+</body>
+</html>
+
+
