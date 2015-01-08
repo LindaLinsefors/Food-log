@@ -1,7 +1,7 @@
 from __future__ import division 
 from django.shortcuts import get_object_or_404, render
 from django import forms
-from models import FoodEntry, FoodStuff
+from models import FoodEntry, FoodStuff, DayTotal, MonthTotal, YearTotal
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist 
@@ -73,7 +73,7 @@ def data(request):
         else:
             year_total = False
 
-    return render(request, 'food/data_google.html'
+    return render(request, 'food/data_google.html',
                     {   'day_total': day_total,
                         'month_total': month_total,
                         'year_total': year_total, 
@@ -86,26 +86,35 @@ def data(request):
 
 # Totals
 
-def save_day_total( date )
+def save_day_total( date ):
     try:
         day_total = DayTotal.objects.get( date=date )
     except ObjectDoesNotExist: 
         day_total = DayTotal( date=date )
 
+    food_entries = FoodEntry.objects.raw('''
+                        SELECT id,
+                        fruit * quantity / 100 AS fruit
+                        FROM food_FoodEntry
+                        ''')
+                                                
+
+
+
     entries = FoodEntry.objects.filter( datetime__year=date.year,
                                         datetime__month=date.month,
-                                        datetime__day=date.day 
+                                        datetime__day=date.day,
                 ).extra( select={   
-                                'fruit_amount': 'fruit * amount / 100'
-                                'dairy_amount': 'dairy * amount / 100'
-                                'water_amount': 'water * amount / 100'
-                                'junk_amount':  'junk * amount / 100'
-                                'veg_amount':   'veg * amount / 100'
-                                'protein_amount': 'protein * amount / 100'
-                                'startch_amount': 'startch * amount / 100'
-                                'unknown_amount': 'unknown * amount / 100'
+                                'fruit_amount': 'fruit * amount / 100',
+                                'dairy_amount': 'dairy * amount / 100',
+                                'water_amount': 'water * amount / 100',
+                                'junk_amount':  'junk * amount / 100',
+                                'veg_amount':   'veg * amount / 100',
+                                'protein_amount': 'protein * amount / 100',
+                                'startch_amount': 'startch * amount / 100',
+                                'unknown_amount': 'unknown * amount / 100',
                                 } ) 
-
+    import pdb; pdb.set_trace()
     if entries.count() == 0:
         try:
             day_total.delete()
@@ -129,7 +138,7 @@ def save_day_total( date )
 
 
 
-def save_month_total(year, month)
+def save_month_total(year, month):
     try:
         month_total = MonthTotal.objects.get( year=year, month=month )
     except ObjectDoesNotExist: 
@@ -164,15 +173,17 @@ def save_month_total(year, month)
     return True
 
 
-def save_year_total(year)
+def save_year_total(year):
     try:
         year_total = YearTotal.objects.get( year=year )
     except ObjectDoesNotExist: 
         year_total = YearTotal( year=year )
 
-    year_total.days = months.aggregate( Sum('days') )
+    months = MonthTotal.objects.filter( year=year )
 
-    if year_total.days == 0:
+    year_total.days = months.aggregate( Sum('days') ).values()[0]
+
+    if year_total.days == None:
         try:
             year_total.delete()
         except:
@@ -229,7 +240,9 @@ def save(food_entry, post):
     food_stuff.ingredients = post['ingredients']
     food_stuff.save()
 
-    date = datetime.datetime.strptime(post['date'], "%Y-%m-%d").date
+    date = datetime.datetime.strptime(post['date'], "%Y-%m-%d").date()
+
+    save_day_total( date )
     
     if date != today():
         save_month_total( date.year, date.month )
