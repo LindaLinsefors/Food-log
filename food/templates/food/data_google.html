@@ -56,7 +56,17 @@
           ['Unknown',   {{ year_total.unknown }} ],
         ]);
 
-        var slices_options ={
+
+        var options = {
+
+            chartArea: {width: "100%", height: "100%"} ,
+            backgroundColor: 'transparent',
+            legend: {textStyle: {color:'white', fontSize:15}},
+            pieSliceTextStyle: {fontSize:13},
+            height: 170,
+
+            pieSliceBorderColor: 'black',
+            slices: {
                 0: {color:'purple', textStyle: {color:'white'}},
                 1: {color:'green', textStyle: {color:'white'}},
                 2: {color:'white', textStyle: {color:'black'}},
@@ -65,28 +75,13 @@
                 5: {color:'red', textStyle: {color:'black'}},
                 6: {color:'black', textStyle: {color:'white'}},
             }
-
-
-        var day_options = {
-
-            chartArea: {width: "90%", height: "90%"} ,
-
-            pieSliceBorderColor: 'black',
-            slices: slices_options
-        };
-
-        var options = {
-
-            chartArea: {width: "90%", height: "90%"} ,
-            legend: 'none',
-
-            pieSliceBorderColor: 'black',
-            slices: slices_options
         };
 
         var day_chart = new google.visualization.PieChart(document.getElementById('day_piechart'));
-        day_chart.draw(day_data, day_options);
+        day_chart.draw(day_data, options);
 
+        options.legend = 'none'
+        //options.width = window.innerWidth/2 - 20
         var month_chart = new google.visualization.PieChart(document.getElementById('month_piechart'));
         month_chart.draw(month_data, options);
 
@@ -110,9 +105,18 @@
     </div>
   </div>
   <div data-role="main" class="ui-content">
-    <div id="day_piechart" style="width: 100%;"></div>
-    <div id="month_piechart" style="width: 100%;"></div>
-    <div id="year_piechart" style="width: 100%;"></div>
+    <p>
+        <b><big>Today</big></b> - total: <b>{{day_total.bowls}}</b> bowls
+        <div id="day_piechart"></div>
+    </p>
+    <p>
+        <b><big>This month</big></b> - average: <b>{{month_total.average_bowls}}</b> bowls/day
+        <div id="month_piechart"></div>
+    </p>
+    <p>
+        <b><big>This year</big></b> - average: <b>{{year_total.average_bowls}}</b> bowls/day
+        <div id="year_piechart"></div>
+    </p>
   </div>
 </body>
 
