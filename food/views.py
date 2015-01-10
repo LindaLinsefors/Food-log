@@ -79,6 +79,9 @@ def data(request):
                     {   'day_total': day_total,
                         'month_total': month_total,
                         'year_total': year_total, 
+                        'day_total_no_water': round(day_total.no_water,2),
+                        'month_total_average_no_water': round(month_total.average_no_water,2),
+                        'year_total_average_no_water': round(year_total.average_no_water,2),
                     })
 
 

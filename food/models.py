@@ -72,7 +72,7 @@ class FoodEntry(Food):
                )
 
 
-class Total(models.Model):
+class MetaTotal(models.Model):
     class Meta:
         abstract = True
 
@@ -95,7 +95,7 @@ class Total(models.Model):
                 + self.unknown )
 
 
-class DayTotal(Total):
+class DayTotal(MetaTotal):
     class Meta:
         ordering = ['-date']
     date = models.DateField( unique=True )
@@ -106,14 +106,30 @@ class DayTotal(Total):
         return unicode(self.date)
 
 
-class MonthTotal(Total):
+class MetaMonthYerTotal(MetaTotal):
+    class Meta:
+        abstract = True
+
+    days = models.SmallIntegerField()
+    last_updated = models.DateField()
+
+    def average_no_water(self):
+        return (  self.fruit 
+                + self.dairy 
+                + self.junk 
+                + self.veg 
+                + self.protein 
+                + self.startch 
+                + self.unknown )/self.days
+
+
+class MonthTotal(MetaMonthYerTotal):
     class Meta:
         unique_together = (('month', 'year'),)
         ordering = ['-year', '-month']
-    month = models.SmallIntegerField()
+
     year = models.SmallIntegerField()
-    days = models.SmallIntegerField()
-    last_updated = models.DateField()
+    month = models.SmallIntegerField()
 
     def __str__(self):
         return str(self.month)+'-'+str(self.year)
@@ -121,12 +137,14 @@ class MonthTotal(Total):
         return unicode(self.month)+u'-'+unicode(self.year)
 
 
-class YearTotal(Total):
+
+
+
+class YearTotal(MetaMonthYerTotal):
     class Meta:
         ordering = ['-year']
+
     year = models.SmallIntegerField( unique=True )
-    days = models.SmallIntegerField()
-    last_updated = models.DateField()
 
     def __str__(self):
         return str(self.year)
