@@ -230,42 +230,36 @@ def update_year(year):
     save_year_total(year)    
 
 
-month_dict = {  'January':1, 
-                'February':2, 
-                'March':3, 
-                'April':4, 
-                'May':5, 
-                'June':6, 
-                'July':7, 
-                'August':8, 
-                'September':9,
-                'October':10, 
-                'November':11,
-                'December':12,  }
+
 
 
 
 def update(request):
     if request.method == 'POST':
 
-        if request.POST['month'] == 'All':
-            update_year(request.POST['year'])
-
+        year = int(request.POST['year'])
+        month = int(request.POST['month'])
+    
+        import pdb; pdb.set_trace()
+        if month == 0:
+            update_year(year)
             message = ( 'All calculations for '
-                        +str(request.POST['year'])
+                        +str(year)
                         +' are uppdated'            )
         else:
-            update_month(   request.POST['year'],
-                            month_dict[ request.POST['month'] ] )
+            update_month(year, month)
 
             message = ( 'All calculations for '
                         +request.POST['month']
                         +' '
-                        +str(request.POST['year'])
+                        +str(year)
                         +' are uppdated'            )
     else:
-        message='This app is suposed to uppdate all calculations automatically when needed. If you for some reason suspect that this has not happen, you can use this page to manualy ask for re-calculations.'
-    return render( request, 'food/update.html', {'message': message} )
+        year = datetime.datetime.now().year
+        message='This food log is suposed to uppdate all calculations automatically when needed. If you for some reason suspect that this has not happen, i.e. if you have enterd data directly into the database or via the admin interface, you can use this page to manualy ask for re-calculations.'
+    return render( request, 'food/update.html', 
+                   {'message': message,
+                    'year': year,           } )
 
 
 
