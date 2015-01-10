@@ -22,6 +22,18 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
+        var day_data = google.visualization.arrayToDataTable([
+          ['Food group', 'number of bowls'],
+          ['Fruit',     {{ day_total.fruit }}   ],
+          ['Veg',       {{ day_total.veg }}     ],
+          ['Dairy',     {{ day_total.dairy }}   ],
+          ['Protein',   {{ day_total.protein }} ],
+          ['Startch',   {{ day_total.startch }} ],
+          ['Junk',      {{ day_total.junk }}    ],
+          ['Unknown',   {{ day_total.unknown }} ],
+        ]);
+
+
         var month_data = google.visualization.arrayToDataTable([
           ['Food group', 'number of bowls'],
           ['Fruit',     {{ month_total.fruit }}   ],
@@ -44,9 +56,36 @@
           ['Unknown',   {{ year_total.unknown }} ],
         ]);
 
-        var options = {
-          /* chartArea: {width:'80%',height:'100%'} */
+        var slices_options ={
+                0: {color:'purple', textStyle: {color:'white'}},
+                1: {color:'green', textStyle: {color:'white'}},
+                2: {color:'white', textStyle: {color:'black'}},
+                3: {color:'brown', textStyle: {color:'white'}},
+                4: {color:'yellow', textStyle: {color:'black'}},
+                5: {color:'red', textStyle: {color:'black'}},
+                6: {color:'black', textStyle: {color:'white'}},
+            }
+
+
+        var day_options = {
+
+            chartArea: {width: "90%", height: "90%"} ,
+
+            pieSliceBorderColor: 'black',
+            slices: slices_options
         };
+
+        var options = {
+
+            chartArea: {width: "90%", height: "90%"} ,
+            legend: 'none',
+
+            pieSliceBorderColor: 'black',
+            slices: slices_options
+        };
+
+        var day_chart = new google.visualization.PieChart(document.getElementById('day_piechart'));
+        day_chart.draw(day_data, day_options);
 
         var month_chart = new google.visualization.PieChart(document.getElementById('month_piechart'));
         month_chart.draw(month_data, options);
@@ -64,13 +103,14 @@
     <div data-role="navbar">
         <ul>
             <li><a href="{% url 'new_food_entry' %}" data-ajax="false" >New Entry</a></li>
-            <li><a href="{% url 'new_food_stuff' %}" data-ajax="false" >New Type</a></li>
+            <li><a href="{% url 'new_food_stuff' %}" data-ajax="false" >New Food</a></li>
             <li><a href="{% url 'menu' %}" data-ajax="false" >Menu</a></li>
             {% block delete %}{% endblock %}
         </ul>       
     </div>
   </div>
   <div data-role="main" class="ui-content">
+    <div id="day_piechart" style="width: 100%;"></div>
     <div id="month_piechart" style="width: 100%;"></div>
     <div id="year_piechart" style="width: 100%;"></div>
   </div>
