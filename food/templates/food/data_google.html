@@ -22,24 +22,37 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var month_data = google.visualization.arrayToDataTable([
           ['Food group', 'number of bowls'],
-          ['Fruit',     {{ day_total.fruit }}   ],
-          ['Veg',       {{ day_total.veg }}     ],
-          ['Dairy',     {{ day_total.dairy }}   ],
-          ['Protein',   {{ day_total.protein }} ],
-          ['Starch',    {{ day_total.starch }}  ],
-          ['Junk',      {{ day_total.junk }}    ],
-          ['Unknown',   {{ day_total.unknown }} ],
+          ['Fruit',     {{ month_total.fruit }}   ],
+          ['Veg',       {{ month_total.veg }}     ],
+          ['Dairy',     {{ month_total.dairy }}   ],
+          ['Protein',   {{ month_total.protein }} ],
+          ['Startch',   {{ month_total.startch }} ],
+          ['Junk',      {{ month_total.junk }}    ],
+          ['Unknown',   {{ month_total.unknown }} ],
+        ]);
+
+        var year_data = google.visualization.arrayToDataTable([
+          ['Food group', 'number of bowls'],
+          ['Fruit',     {{ year_total.fruit }}   ],
+          ['Veg',       {{ year_total.veg }}     ],
+          ['Dairy',     {{ year_total.dairy }}   ],
+          ['Protein',   {{ year_total.protein }} ],
+          ['Startch',   {{ year_total.startch }} ],
+          ['Junk',      {{ year_total.junk }}    ],
+          ['Unknown',   {{ year_total.unknown }} ],
         ]);
 
         var options = {
           /* chartArea: {width:'80%',height:'100%'} */
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var month_chart = new google.visualization.PieChart(document.getElementById('month_piechart'));
+        month_chart.draw(month_data, options);
 
-        chart.draw(data, options);
+        var year_chart = new google.visualization.PieChart(document.getElementById('year_piechart'));
+        year_chart.draw(year_data, options);
       }
     </script>
 </head>
@@ -58,7 +71,8 @@
     </div>
   </div>
   <div data-role="main" class="ui-content">
-    <div id="piechart" style="width: 100%;"></div>
+    <div id="month_piechart" style="width: 100%;"></div>
+    <div id="year_piechart" style="width: 100%;"></div>
   </div>
 </body>
 

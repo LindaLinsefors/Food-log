@@ -73,6 +73,8 @@ def data(request):
         else:
             year_total = False
 
+    print day_total, month_total, year_total
+
     return render(request, 'food/data_google.html',
                     {   'day_total': day_total,
                         'month_total': month_total,
